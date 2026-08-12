@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/contact.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">LC</div>
+                <div class="logo-text">
+                    Legend College
+                    <span>of Nursing Sciences</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li class="dropdown">
+                    <a href="" class="nav-link">About</a>
+                    <div class="dropdown-menu">
+                        <a href="/about">Overview</a>
+                        <a href="/history">History</a>
+                        <a href="/mission">Mission & Vision</a>
+                    </div>
+                </li>
+                <li><a href="/admission" class="nav-link">Admission</a></li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+        <a href="/" onclick="toggleMobileMenu()">Home</a>
+        <div class="mobile-dropdown">
+            <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                About <span>&#9662;</span>
+            </a>
+            <div class="mobile-dropdown-menu">
+                <a href="/about">Overview</a>
+                <a href="/history">History</a>
+                <a href="/mission">Mission & Vision</a>
+            </div>
+        </div>
+        <a href="/admission" class="mobile-dropdown-toggle">Admission</a>
+        <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Contact Us</h1>
+            <p>Get in touch with us for any inquiries or questions</p>
+            <div class="breadcrumb">
+                <a href="/">Home</a>
+                <span>/</span>
+                <span>Contact</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Split Section -->
+        <section class="split-section">
+            <!-- Info Column -->
+            <div class="info-column">
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Visit Us</h3>
+                    <p>
+                        <strong>Legend College of Nursing Sciences</strong><br>
+                        Ambassador Plaza, Opp. Convaj Hotel<br>
+                        No. 2 Metu Uzodike Street<br>
+                        Okpuno Otolo, Nnewi<br>
+                        Anambra State, Nigeria
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>
+                        <strong>Admissions:</strong> +234 806 209 6731<br>
+                        <strong>General:</strong> +234 813 182 0224<br>
+                        <!-- <strong>Hotline:</strong> +234 701 234 5678 -->
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>
+                        <strong>Admissions:</strong> admissions@legendcons.com<br>
+                        <strong>General:</strong> info@legendcollege25@gmail.com
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Office Hours</h3>
+                    <p>
+                        <strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM<br>
+                        <strong>Saturday:</strong> 9:00 AM - 2:00 PM<br>
+                        <strong>Sunday:</strong> Closed
+                    </p>
+                </div>
+            </div>
+
+            <!-- Form Column -->
+            <div class="form-column">
+                <div class="form-card">
+                    <h2>Send a Message</h2>
+                    <p>Have a question? Fill out the form below and we'll respond promptly.</p>
+
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" required
+                                placeholder="Type your message here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.4528342564496!2d6.908699314769467!3d6.019900895536479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1043e8f4c5a3c6e7%3A0x1c2c3d4e5f6g7h8i!2sNnewi%2C%20Anambra%20State%2C%20Nigeria!5e0!3m2!1sen!2sng!4v1645564758963!5m2!1sen!2sng"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <div class="map-overlay">
+                    <h4>Legend College of Nursing Sciences</h4>
+                    <p>Ambassador Plaza, Opp. Convaj Hotel, Okpuno Otolo, Nnewi</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Social Section -->
+    <section class="social-section">
+        <div class="main-container">
+            <h3>Connect With Us</h3>
+            <p>Follow us on social media for updates and announcements</p>
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://youtube.com" target="_blank" class="social-link" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="main-container">
+            <p>&copy; 2026 Legend College of Nursing Sciences Nnewi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" onclick="scrollToTop()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </div>
+
+    <script src="/js/contact.js"></script>
+</body>
+
+</html>

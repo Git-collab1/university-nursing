@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | Legend College of Nursing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/admission.css">
+    <style>
+        .payment-page {
+            padding: 120px 0 60px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        }
+
+        .payment-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .payment-header h1 {
+            font-family: 'Playfair Display', serif;
+            color: #0D6E6E;
+            margin-bottom: 10px;
+        }
+
+        .payment-header p {
+            color: #5D6D7E;
+        }
+
+        .payment-amount {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .payment-amount .label {
+            font-size: 1rem;
+            color: #5D6D7E;
+            margin-bottom: 5px;
+        }
+
+        .payment-amount .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #E8505B;
+        }
+
+        .payment-instructions-box {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .payment-instructions-box h4 {
+            color: #92400e;
+            margin-bottom: 15px;
+        }
+
+        .payment-instructions-box ol {
+            padding-left: 20px;
+            color: #92400e;
+        }
+
+        .payment-instructions-box li {
+            margin-bottom: 8px;
+        }
+
+        .bank-details-display {
+            background: #f0f8f8;
+            border: 2px dashed #0D6E6E;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .bank-details-display h3 {
+            color: #0D6E6E;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .bank-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .bank-detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .bank-detail-label {
+            font-weight: 600;
+            color: #5D6D7E;
+        }
+
+        .bank-detail-value {
+            font-weight: 700;
+            color: #2C3E50;
+        }
+
+        .bank-detail-value.account-number {
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            color: #0D6E6E;
+        }
+
+        .file-upload {
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .file-upload:hover {
+            border-color: #0D6E6E;
+            background: #f0f8f8;
+        }
+
+        .file-upload i {
+            font-size: 2rem;
+            color: #0D6E6E;
+            margin-bottom: 10px;
+        }
+
+        .file-upload p {
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 5px;
+        }
+
+        .file-upload span {
+            color: #5D6D7E;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0D6E6E 0%, #14919B 100%);
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: #0D6E6E;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 2px solid #0D6E6E;
+            cursor: pointer;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .form-actions .btn-outline {
+            flex: 1;
+        }
+
+        .form-actions .btn-primary {
+            flex: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Social Media Buttons -->
+    <div class="floating-social">
+        <a href="https://facebook.com" target="_blank" class="facebook" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://wa.me/2348131820224" target="_blank" class="whatsapp" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Payment Page -->
+    <div class="payment-page">
+        <div class="container">
+            <div class="payment-card">
+                <div class="payment-header">
+                    <h1><i class="fas fa-university"></i> Application Fee Payment</h1>
+                    <p>Complete your application by paying to MONIEPOINT bank account</p>
+                </div>
+
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <div class="alert alert-error"><%= error %></div>
+                <% } %>
+
+                <% if (typeof success !== 'undefined' && success) { %>
+                    <div class="alert alert-success"><%= success %></div>
+                <% } %>
+
+                <div class="payment-amount">
+                    <div class="label">Application Fee</div>
+                    <div class="amount"><span class="currency">₦</span>15,000</div>
+                </div>
+
+                <div class="payment-info">
+                    <p>
+                        <strong>Applicant Name:</strong>
+                        <span><%= student ? (student.firstName + ' ' + student.lastName) : '' %></span>
+                    </p>
+                    <p>
+                        <strong>Email:</strong>
+                        <span><%= student ? student.email : '' %></span>
+                    </p>
+                    <p>
+                        <strong>Program:</strong>
+                        <span><%= student ? student.program : 'Not selected' %></span>
+                    </p>
+                </div>
+
+                <!-- Step 1: Bank Details -->
+                <div id="step1" class="payment-step">
+                    <!-- Payment Instructions -->
+                    <div class="payment-instructions-box">
+                        <h4><i class="fas fa-info-circle"></i> How to Pay</h4>
+                        <ol>
+                            <li>Transfer ₦20,000 to the MONIEPOINT account below</li>
+                            <li>Use mobile banking or visit any bank branch</li>
+                            <li>Save your transaction reference/receipt number</li>
+                            <li>Click "I Have Paid" button below to upload your receipt</li>
+                            <li>Submit and wait for confirmation (24-48 hours)</li>
+                        </ol>
+                    </div>
+
+                    <!-- Bank Details -->
+                    <div class="bank-details-display">
+                        <h3><i class="fas fa-building-columns"></i> Bank Transfer Details</h3>
+                        <div class="bank-detail-row">
+                            <span class="bank-detail-label">Bank Name:</span>
+                            <span class="bank-detail-value">MONIEPOINT</span>
+                        </div>
+                        <div class="bank-detail-row">
+                            <span class="bank-detail-label">Account Name:</span>
+                            <span class="bank-detail-value">Legend College of Nursing Sciences Ltd</span>
+                        </div>
+                        <div class="bank-detail-row">
+                            <span class="bank-detail-label">Account Number:</span>
+                            <span class="bank-detail-value account-number">4005170006</span>
+                        </div>
+                    </div>
+
+                    <button type="button" id="paidBtn" class="btn-primary">
+                        <i class="fas fa-check"></i> I Have Paid
+                    </button>
+                </div>
+
+                <!-- Step 2: Payment Form -->
+                <div id="step2" class="payment-step" style="display: none;">
+                    <div class="payment-note" style="margin-bottom: 20px;">
+                        <p><i class="fas fa-info-circle"></i> After payment, you will receive a confirmation email and your application will be submitted for review.</p>
+                    </div>
+
+                    <form action="/process-payment" method="POST" enctype="multipart/form-data" id="paymentForm">
+                        <input type="hidden" name="studentId" value="<%= student ? student._id : '' %>">
+
+                        <div class="form-group">
+                            <label for="bankName">Your Bank Name *</label>
+                            <select id="bankName" name="bankName" required>
+                                <option value="">Select your bank</option>
+                                <option value="First Bank of Nigeria">First Bank of Nigeria</option>
+                                <option value="Guaranty Trust Bank">Guaranty Trust Bank (GTBank)</option>
+                                <option value="Zenith Bank">Zenith Bank</option>
+                                <option value="United Bank for Africa">United Bank for Africa (UBA)</option>
+                                <option value="Access Bank">Access Bank</option>
+                                <option value="Fidelity Bank">Fidelity Bank</option>
+                                <option value="Ecobank">Ecobank</option>
+                                <option value="Sterling Bank">Sterling Bank</option>
+                                <option value="Union Bank">Union Bank</option>
+                                <option value="Other">Other Bank</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transactionId">Transaction Reference / Teller Number *</label>
+                            <input type="text" id="transactionId" name="transactionId" placeholder="Enter your payment reference number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="paymentDate">Payment Date *</label>
+                            <input type="date" id="paymentDate" name="paymentDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Upload Payment Receipt *</label>
+                            <div class="file-upload" data-input="paymentReceipt">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p id="paymentReceiptFilename">Upload your bank payment receipt</p>
+                                <span>click to browse (PDF, JPG, PNG)</span>
+                                <input type="file" name="paymentReceipt" accept=".pdf,.jpg,.jpeg,.png" required style="display: none;">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" id="backBtn" class="btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i> Submit Payment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set max date to today
+        const dateInput = document.getElementById('paymentDate');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.max = today;
+        }
+
+        // Step navigation
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const paidBtn = document.getElementById('paidBtn');
+        const backBtn = document.getElementById('backBtn');
+
+        // Show step 2 if there's an error (user already tried to submit)
+        <% if (typeof error !== 'undefined' && error) { %>
+            step1.style.display = 'none';
+            step2.style.display = 'block';
+        <% } %>
+
+        paidBtn.addEventListener('click', function() {
+            step1.style.display = 'none';
+            step2.style.display = 'block';
+        });
+
+        backBtn.addEventListener('click', function() {
+            step2.style.display = 'none';
+            step1.style.display = 'block';
+        });
+
+        // File upload functionality
+        document.querySelectorAll('.file-upload').forEach(upload => {
+            const inputName = upload.getAttribute('data-input');
+            const fileInput = upload.querySelector('input[type="file"]');
+
+            upload.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function() {
+                const filename = this.files[0] ? this.files[0].name : 'Upload your bank payment receipt';
+                document.getElementById(inputName + 'Filename').textContent = filename;
+            });
+        });
+
+        // Form validation
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            const bankName = document.getElementById('bankName').value;
+            const ref = document.getElementById('transactionId').value;
+
+            if (!bankName || !ref) {
+                e.preventDefault();
+                alert('Please fill in all required fields');
+            }
+        });
+    </script>
+</body>
+
+</html>

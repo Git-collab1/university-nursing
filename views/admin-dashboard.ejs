@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Legend College of Nursing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/admission.css">
+</head>
+
+<body class="dashboard-page">
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="logo">
+            <img src="/images/LEGEND_COLLEGE_LOGO_015925-removebg-preview.png" alt="Logo">
+            <h2>Admin Dashboard</h2>
+        </div>
+        <div class="user-info">
+            <span>Welcome, <strong><%= admin ? admin.fullName : 'Admin' %></strong></span>
+            <a href="/admin-logout" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+        <!-- Stats Cards -->
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <h4>Total Applications</h4>
+                <div class="value"><%= stats.total %></div>
+            </div>
+            <div class="stat-card pending">
+                <h4>Pending Review</h4>
+                <div class="value"><%= stats.pending %></div>
+            </div>
+            <div class="stat-card approved">
+                <h4>Approved</h4>
+                <div class="value"><%= stats.approved %></div>
+            </div>
+            <div class="stat-card rejected">
+                <h4>Rejected</h4>
+                <div class="value"><%= stats.rejected %></div>
+            </div>
+            <div class="stat-card">
+                <h4>Pending Payments</h4>
+                <div class="value"><%= stats.pendingPayments %></div>
+            </div>
+            <div class="stat-card">
+                <h4>Paid</h4>
+                <div class="value"><%= stats.paidStudents %></div>
+            </div>
+            <div class="stat-card">
+                <h4>Unpaid</h4>
+                <div class="value"><%= stats.unpaidStudents %></div>
+            </div>
+        </div>
+
+        <!-- Applications Table -->
+        <div class="applications-table">
+            <h3>Recent Applications</h3>
+
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="alert alert-error"><%= error %></div>
+            <% } %>
+
+            <% if (typeof success !== 'undefined' && success) { %>
+                <div class="alert alert-success"><%= success %></div>
+            <% } %>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Program</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (students && students.length > 0) { %>
+                        <% students.forEach(function(student) { %>
+                            <tr>
+                                <td><%= student.firstName %> <%= student.lastName %></td>
+                                <td><%= student.email %></td>
+                                <td><%= student.program %></td>
+                                <td>
+                                    <span class="status-badge <%= student.paymentStatus %>">
+                                        <%= student.paymentStatus %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge <%= student.applicationStatus %>">
+                                        <%= student.applicationStatus.replace('_', ' ') %>
+                                    </span>
+                                </td>
+                                <td><%= new Date(student.createdAt).toLocaleDateString() %></td>
+                                <td>
+                                    <div style="display: flex; gap: 8px;">
+                                        <form action="/admin/update-status" method="POST" style="display: inline;">
+                                            <input type="hidden" name="studentId" value="<%= student._id %>">
+                                            <input type="hidden" name="status" value="approved">
+                                            <button type="submit" style="background: #28a745; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                                                <i class="fas fa-check"></i> Approve
+                                            </button>
+                                        </form>
+                                        <form action="/admin/update-status" method="POST" style="display: inline;">
+                                            <input type="hidden" name="studentId" value="<%= student._id %>">
+                                            <input type="hidden" name="status" value="rejected">
+                                            <button type="submit" style="background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                                                <i class="fas fa-times"></i> Reject
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 30px;">No applications found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <div class="logo-icon">LC</div>
+                        <div class="logo-text">
+                            Legend College
+                            <span>of Nursing Sciences</span>
+                        </div>
+                    </a>
+                    <p>Committed to excellence in nursing education and producing world-class healthcare professionals.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/admission">Admission</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234 813 182 0224</li>
+                        <li><i class="fas fa-envelope"></i> info@legendcollege25@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Nnewi, Nigeria</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Legend College of Nursing Sciences. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/index.js"></script>
+</body>
+
+</html>
+

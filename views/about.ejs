@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>About Us - Legend College of Nursing Sciences Nnewi</title> -->
+    <title>
+        <%= title %>
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/about.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">LC</div>
+                <div class="logo-text">
+                    Legend College
+                    <span>of Nursing And Emergency Health Sciences Nnewi</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li class="dropdown">
+                    <a href="" class="nav-link">About</a>
+                    <div class="dropdown-menu">
+                        <a href="/about">Overview</a>
+                        <a href="/history">History</a>
+                        <a href="/mission">Mission & Vision</a>
+                    </div>
+                </li>
+                <li><a href="/admission" class="nav-link">Admission</a></li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+        <a href="/" onclick="toggleMobileMenu()">Home</a>
+        <div class="mobile-dropdown">
+            <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                About <span>&#9662;</span>
+            </a>
+            <div class="mobile-dropdown-menu">
+                <a href="/about">Overview</a>
+                <a href="/history">History</a>
+                <a href="/mission">Mission & Vision</a>
+            </div>
+        </div>
+        <a href="/admission" class="mobile-dropdown-toggle">Admission</a>
+        <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>About Us</h1>
+            <p>Discover our commitment to excellence in nursing education and healthcare training</p>
+            <div class="breadcrumb">
+                <a href="/">Home</a>
+                <span>/</span>
+                <span>About</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in-section">
+                    <img src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&h=500&fit=crop"
+                        alt="Nursing students in classroom">
+                </div>
+                <div class="about-content fade-in-section">
+                    <h2>Shaping the Future of <span>Healthcare</span></h2>
+                    <p>Legend College of Nursing Sciences Nnewi is a dynamic vision-driven private penticostal christian
+                        institution founded on christian mission ethos. The College is committed to pioneering
+                        excellence at the cutting-edge of learning, with a compeling vision of raising a new generation
+                        of leaders in Nursing education that will make a difference globally. With a focus on
+                        enlightening the total man Via a hoslistic, human development and integrated learning
+                        curriculum, Legend College is well positioned to produce highly skilled and well equiped
+                        professionals capable of driving a narrative of positive change, and bring healing to our ailing
+                        world by prioritizing patient-centered care and evidence-based practice.</p>
+                    <p>The insitution has one college primarily dedicated towards healthcare delivery. Given the
+                        transformative impact of digitalization and new technologies on healthcare, Legend is poised to
+                        leverage these advancements to revolutionize healthcare education and delivery. By incoporating
+                        innorative learning experience, such as simulations, online lectures, and patient-centered
+                        decision support tools, we aim at equiping students with the knowledge and skills necessary to
+                        excel in the ever evolving healthcare landscape.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">✓</div>
+                            <span>Accredited Programs</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">✓</div>
+                            <span>Expert Faculty</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">✓</div>
+                            <span>Modern Facilities</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">✓</div>
+                            <span>Clinical Placements</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="subtitle">Why Choose Us</div>
+                <h2>Our Core Values</h2>
+                <p>We are committed to providing the best nursing education with values that guide everything we do.</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card fade-in-up">
+                    <div class="value-icon">🎓</div>
+                    <h3>Excellence</h3>
+                    <p>We strive for academic and clinical excellence in everything we do, preparing nurses who exceed
+                        industry standards.</p>
+                </div>
+                <div class="value-card fade-in-up">
+                    <div class="value-icon">💚</div>
+                    <h3>Compassion</h3>
+                    <p>We nurture empathetic healthcare professionals who care deeply for their patients and
+                        communities.</p>
+                </div>
+                <div class="value-card fade-in-up">
+                    <div class="value-icon">🔬</div>
+                    <h3>Innovation</h3>
+                    <p>We embrace modern teaching methods and technologies to prepare nurses for the future of
+                        healthcare.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Nursing Career?</h2>
+                <p>Join us at Legend College of Nursing Sciences and become part of the next generation of healthcare
+                    leaders.</p>
+                <a href="/contact" class="btn btn-white">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">LC</div>
+                        <div class="logo-text">
+                            Legend College
+                            <span>of Nursing And Emergency Health Sciences Nnewi</span>
+                        </div>
+                    </a>
+                    <p>Committed to excellence in nursing education and producing world-class healthcare professionals.
+                    </p>
+
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Ambassador Plaza, Opp. Convaj Hotel</li>
+                        <li><i class="fas fa-map"></i> No. 2 Metu Uzodike Street, Okpuno Otolo, Nnewi</li>
+                        <li><i class="fas fa-phone"></i> +234 813 182 0224</li>
+                        <li><i class="fas fa-envelope"></i> info@legendcollege25@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Legend College of Nursing And Emergency Health Sciences Nnewi. All Rights Reserved.</p>
+                <div>
+                    <a href="#">Privacy Policy</a> |
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" onclick="scrollToTop()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </div>
+
+    <script src="/js/about.js"></script>
+</body>
+
+</html>

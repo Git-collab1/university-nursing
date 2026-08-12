@@ -1,0 +1,33 @@
+{
+  "name": "university-health",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "seed": "node seed-admin.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "20.x"
+  },
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^4.0.1",
+    "express": "^4.22.1",
+    "express-session": "^1.18.2",
+    "mongoose": "^9.1.4",
+    "multer": "^2.0.2",
+    "nodemailer": "^8.0.11",
+    "twilio": "^5.11.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

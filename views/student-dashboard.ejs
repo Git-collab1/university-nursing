@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Legend College of Nursing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/admission.css">
+</head>
+
+<body class="dashboard-page">
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="logo">
+            <img src="/images/LEGEND_COLLEGE_LOGO_015925-removebg-preview.png" alt="Logo">
+            <h2>Student Dashboard</h2>
+        </div>
+        <div class="user-info">
+            <span>Welcome, <strong><%= student ? (student.firstName || 'Student') : 'Student' %></strong></span>
+            <a href="/student-logout" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-error"><%= error %></div>
+        <% } %>
+
+        <!-- Application Status Card -->
+        <div class="applications-table">
+            <h3>Your Application Status</h3>
+
+            <% if (student) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Program</th>
+                        <th>Payment Status</th>
+                        <th>Application Status</th>
+                        <th>Date Applied</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>LCN-<%= student._id.toString().slice(-8).toUpperCase() %></td>
+                        <td><%= student.program || 'Not selected' %></td>
+                        <td>
+                            <span class="status-badge <%= student.paymentStatus %>">
+                                <%= student.paymentStatus %>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="status-badge <%= student.applicationStatus %>">
+                                <%= student.applicationStatus.replace('_', ' ') %>
+                            </span>
+                        </td>
+                        <td><%= student.createdAt ? new Date(student.createdAt).toLocaleDateString() : 'N/A' %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <% } %>
+        </div>
+
+        <!-- Action Buttons based on status -->
+        <div style="margin-top: 30px;">
+            <% if (!student.firstName || !student.program) { %>
+                <!-- Form not filled yet -->
+                <div class="applications-table">
+                    <h3><i class="fas fa-clipboard-list"></i> Step 1: Fill Application Form</h3>
+                    <p>Please complete your application form with all required information.</p>
+                    <a href="/student-form" class="submit-btn" style="display: inline-block; width: auto; padding: 14px 40px; margin-top: 15px;">
+                        <i class="fas fa-edit"></i> Fill Application Form
+                    </a>
+                </div>
+            <% } else if (student.paymentStatus !== 'paid') { %>
+                <!-- Form filled, but not paid -->
+                <div class="applications-table">
+                    <h3><i class="fas fa-credit-card"></i> Step 2: Pay Application Fee</h3>
+                    <p>Your application form has been saved. Please pay the ₦15,000 application fee to complete your submission.</p>
+                    <a href="/payment" class="submit-btn" style="display: inline-block; width: auto; padding: 14px 40px; margin-top: 15px;">
+                        <i class="fas fa-credit-card"></i> Pay ₦15,000
+                    </a>
+                </div>
+            <% } else { %>
+                <!-- Application submitted -->
+                <div class="applications-table">
+                    <h3><i class="fas fa-check-circle"></i> Application Submitted</h3>
+                    <p>Your application has been submitted successfully. We will review it and get back to you within 5-7 business days.</p>
+                </div>
+            <% } %>
+        </div>
+
+        <!-- Personal Information -->
+        <% if (student && student.firstName) { %>
+        <div class="applications-table" style="margin-top: 30px;">
+            <h3>Your Information</h3>
+            <table>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Full Name:</strong></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.firstName %> <%= student.lastName %></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Email:</strong></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.email %></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Phone:</strong></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.phone %></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Date of Birth:</strong></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.dateOfBirth ? new Date(student.dateOfBirth).toLocaleDateString() : 'N/A' %></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Gender:</strong></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.gender || 'N/A' %></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Address:</strong></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.address ? student.address.street + ', ' + student.address.city + ', ' + student.address.state + ', ' + student.address.country : 'N/A' %></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Guardian:</strong></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.guardianName ? student.guardianName + ' (' + student.guardianRelationship + ')' : 'N/A' %></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Previous School:</strong></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.previousSchool || 'N/A' %></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>O-Level Results:</strong></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.oLevelResult || 'N/A' %></td>
+                </tr>
+            </table>
+ </div>
+            <% } %>
+        </div>
+
+    </div>
+
+    <footer class="footer" style="margin-top: 60px;">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <div class="logo-icon">LC</div>
+                        <div class="logo-text">
+                            Legend College
+                            <span>of Nursing Sciences</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Legend College of Nursing Sciences. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/index.js"></script>
+</body>
+
+</html>
+

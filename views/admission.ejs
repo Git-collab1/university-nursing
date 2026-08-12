@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/admission.css">
+</head>
+
+<body>
+    <!-- Floating Social Media Buttons -->
+    <div class="floating-social">
+        <a href="https://facebook.com" target="_blank" class="facebook" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://wa.me/2348131820224" target="_blank" class="whatsapp" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <img src="/images/LEGEND_COLLEGE_LOGO_015925-removebg-preview.png" alt="">
+                </div>
+                <div class="logo-text">
+                    Legend College
+                    <span>of Nursing Sciences</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li class="dropdown">
+                    <a href="" class="nav-link">About</a>
+                    <div class="dropdown-menu">
+                        <a href="/about">Overview</a>
+                        <a href="/history">History</a>
+                        <a href="/mission">Mission & Vision</a>
+                    </div>
+                </li>
+                <li><a href="/admission" class="nav-link active">Admission</a></li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+        <a href="/" onclick="toggleMobileMenu()">Home</a>
+        <div class="mobile-dropdown">
+            <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this, event)">
+                About <span>&#9662;</span>
+            </a>
+            <div class="mobile-dropdown-menu">
+                <a href="/about">Overview</a>
+                <a href="/history">History</a>
+                <a href="/mission">Mission & Vision</a>
+            </div>
+        </div>
+        <a href="/admission" class="mobile-dropdown-toggle">Admission</a>
+        <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="admission-hero">
+        <div class="hero-content">
+            <h1>Join Legend College of Nursing Sciences</h1>
+            <p>Begin your journey towards a rewarding career in healthcare. Apply now and take the first step towards becoming a professional nurse.</p>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="container">
+            <h2>Select Your Login Portal</h2>
+            <div class="login-cards">
+                <!-- Student Login -->
+                <div class="login-card student-card">
+                    <div class="login-card-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Student Portal</h3>
+                    <p>New students can register and submit their application forms. Existing students can check their application status.</p>
+                    <a href="/student-login" class="login-btn student-btn">Student Login</a>
+                </div>
+
+                <!-- Staff Login -->
+                <div class="login-card staff-card">
+                    <div class="login-card-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Staff Portal</h3>
+                    <p>Faculty and staff members can access the staff dashboard to manage applications and student records.</p>
+                    <a href="/staff-login" class="login-btn staff-btn">Staff Login</a>
+                </div>
+
+                <!-- Admin Login -->
+                <div class="login-card admin-card">
+                    <div class="login-card-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Admin Portal</h3>
+                    <p>Administrators can access the admin dashboard to review applications, manage staff, and oversee admissions.</p>
+                    <a href="/admin-login" class="login-btn admin-btn">Admin Login</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <div class="logo-icon">
+                            <img src="/images/LEGEND_COLLEGE_LOGO_015925-removebg-preview.png" alt="">
+                        </div>
+                        <div class="logo-text">
+                            Legend College
+                            <span>of Nursing Sciences</span>
+                        </div>
+                    </a>
+                    <p>Committed to excellence in nursing education.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/admission">Admission</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234 813 182 0224</li>
+                        <li><i class="fas fa-envelope"></i> legendcollege25@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Nigeria</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Legend College of Nursing Sciences. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/admission.js"></script>
+</body>
+
+</html>

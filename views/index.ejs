@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+    <!-- Floating Social Media Buttons -->
+    <div class="floating-social">
+        <a href="https://facebook.com" target="_blank" class="facebook" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://wa.me/2348131820224" target="_blank" class="whatsapp" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <img src="/images/LEGEND_COLLEGE_LOGO_015925-removebg-preview.png" alt="">
+                </div>
+                <div class="logo-text">
+                    Legend College
+                    <span>of Nursing Sciences</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li class="dropdown">
+                    <a href="" class="nav-link">About</a>
+                    <div class="dropdown-menu">
+                        <a href="/about">Overview</a>
+                        <a href="/history">History</a>
+                        <a href="/mission">Mission & Vision</a>
+                    </div>
+                </li>
+                <li><a href="/admission" class="nav-link">Admission</a></li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+        <a href="/" onclick="toggleMobileMenu()">Home</a>
+        <div class="mobile-dropdown">
+            <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this, event)">
+                About <span>&#9662;</span>
+            </a>
+            <div class="mobile-dropdown-menu">
+                <a href="/about">Overview</a>
+                <a href="/history">History</a>
+                <a href="/mission">Mission & Vision</a>
+            </div>
+        </div>
+        <a href="/admission" class="mobile-dropdown-toggle">Admission</a>
+        <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+    </div>
+
+    <!-- Hero Section with Slideshow -->
+    <section id="home" class="hero">
+        <div class="slideshow">
+            <div class="slide active"
+                style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1920&q=80');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1551193142-b3bbd90e3d5d?w=1920&q=80');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=1920&q=80');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1920&q=80');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1920&q=80');">
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-logo">LC</div>
+            <p class="hero-tagline">Excellence in Healthcare Education</p>
+            <h1>Legend College of Nursing Sciences And Emergency Health Sciences Nnewi</h1>
+            <p>Committed to producing world-class nursing professionals through quality education, practical training,
+                and compassionate care.</p>
+            <div class="hero-buttons">
+                <a href="/programs" class="btn btn-primary">
+                    <i class="fas fa-graduation-cap"></i>
+                    Explore Programs
+                </a>
+                <a href="/contact" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i>
+                    Contact Us
+                </a>
+            </div>
+        </div>
+        <div class="slideshow-nav">
+            <span class="slide-dot active" onclick="goToSlide(0)"></span>
+            <span class="slide-dot" onclick="goToSlide(1)"></span>
+            <span class="slide-dot" onclick="goToSlide(2)"></span>
+            <span class="slide-dot" onclick="goToSlide(3)"></span>
+            <span class="slide-dot" onclick="goToSlide(4)"></span>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <!-- <section class="faculty" id="faculty">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Meet Our Faculty</h2>
+                <div class="divider"><span></span></div>
+                <p>Our dedicated team of educators brings years of experience and expertise to guide you on your
+                    academic journey.</p>
+            </div>
+            <div class="faculty-grid">
+                <div class="faculty-card fade-in">
+                    <div class="faculty-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop"
+                            alt="Dr. Emmanuel Okonkwo">
+                    </div>
+                    <h3>Dr. Emmanuel Okonkwo</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                    <p class="faculty-bio">Ph.D. from MIT with 20+ years of research experience in AI and Machine
+                        Learning.</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="faculty-card fade-in">
+                    <div class="faculty-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop"
+                            alt="Dr. Grace Nwosu">
+                    </div>
+                    <h3>Dr. Grace Nwosu</h3>
+                    <p class="faculty-title">Dean of Business School</p>
+                    <p class="faculty-bio">MBA from Harvard Business School, expert in strategic management and
+                        entrepreneurship.</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="faculty-card fade-in">
+                    <div class="faculty-image">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop"
+                            alt="Prof. James Eze">
+                    </div>
+                    <h3>Prof. James Eze</h3>
+                    <p class="faculty-title">Head of Engineering</p>
+                    <p class="faculty-bio">Ph.D. in Civil Engineering, leading researcher in sustainable construction.
+                    </p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="faculty-card fade-in">
+                    <div class="faculty-image">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop"
+                            alt="Dr. Amara Obi">
+                    </div>
+                    <h3>Dr. Amara Obi</h3>
+                    <p class="faculty-title">Professor of Law</p>
+                    <p class="faculty-bio">LLM from Oxford, constitutional law expert with extensive courtroom
+                        experience.</p>
+                    <div class="faculty-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Video Section -->
+    <section class="video-section" id="video">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Experience Our Campus</h2>
+                <div class="divider"><span></span></div>
+                <p>Take a virtual tour of our beautiful campus and see what makes Legend College of University special.
+                </p>
+            </div>
+            <!-- <div class="video-wrapper fade-in">
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/cxFH8SPZ4GA?si=Jp6LQopaz475UeS0"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div> -->
+            <div class="video-features">
+                <div class="video-feature-item fade-in">
+                    <i class="fas fa-building"></i>
+                    <h4>Modern Facilities</h4>
+                    <p>State-of-the-art classrooms and laboratories</p>
+                </div>
+                <div class="video-feature-item fade-in">
+                    <i class="fas fa-tree"></i>
+                    <h4>Beautiful Campus</h4>
+                    <p>Lush green spaces for recreation and study</p>
+                </div>
+                <div class="video-feature-item fade-in">
+                    <i class="fas fa-users"></i>
+                    <h4>Vibrant Community</h4>
+                    <p>Join a diverse and inclusive student body</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">LC</div>
+                        <div class="logo-text">
+                            Legend College
+                            <span>of Nursing And Emergency Health Sciences Nnewi</span>
+                        </div>
+                    </a>
+                    <p>Committed to excellence in nursing education and producing world-class healthcare professionals.
+                    </p>
+
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Ambassador Plaza, Opp. Convaj Hotel</li>
+                        <li><i class="fas fa-map"></i> No. 2 Metu Uzodike Street, Okpuno Otolo, Nnewi</li>
+                        <li><i class="fas fa-phone"></i> +234 813 182 0224</li>
+                        <li><i class="fas fa-envelope"></i> info@legendcollege25@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Legend College of Nursing And Emergency Health Sciences Nnewi. All Rights Reserved.</p>
+                <div>
+                    <a href="#">Privacy Policy</a> |
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" onclick="scrollToTop()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </div>
+    <script src="/js/index.js"></script>
+</body>
+
+</html>

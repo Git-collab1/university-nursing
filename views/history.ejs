@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/history.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">LC</div>
+                <div class="logo-text">
+                    Legend College
+                    <span>of Nursing Sciences</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li class="dropdown">
+                    <a href="" class="nav-link">About</a>
+                    <div class="dropdown-menu">
+                        <a href="/about">Overview</a>
+                        <a href="/history">History</a>
+                        <a href="/mission">Mission & Vision</a>
+                    </div>
+                </li>
+                <li><a href="/admission" class="nav-link">Admission</a></li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+        <a href="/" onclick="toggleMobileMenu()">Home</a>
+        <div class="mobile-dropdown">
+            <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                About <span>&#9662;</span>
+            </a>
+            <div class="mobile-dropdown-menu">
+                <a href="/about">Overview</a>
+                <a href="/history">History</a>
+                <a href="/mission">Mission & Vision</a>
+            </div>
+        </div>
+        <a href="/admission" class="mobile-dropdown-toggle">Admission</a>
+        <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Our History</h1>
+            <p>A legacy of excellence in nursing education since our founding</p>
+            <div class="breadcrumb">
+                <a href="/">Home</a>
+                <span>/</span>
+                <span>History</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header fade-in-section">
+                <div class="subtitle">Our Journey</div>
+                <h2>Milestones Through the Years</h2>
+                <p>From our humble beginnings to becoming a premier nursing institution</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item fade-in-section">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2008</span>
+                        <h3>Foundation</h3>
+                        <p>Legend College of Nursing Sciences was established with a vision to address the growing need
+                            for qualified nurses in Nigeria.</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in-section">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2010</span>
+                        <h3>First Cohort</h3>
+                        <p>We welcomed our first batch of nursing students, marking the beginning of our journey in
+                            healthcare education.</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in-section">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2013</span>
+                        <h3>Accreditation</h3>
+                        <p>Received full accreditation from the Nursing and Midwifery Council of Nigeria, affirming our
+                            commitment to quality education.</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in-section">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2016</span>
+                        <h3>Expansion</h3>
+                        <p>Expanded our campus facilities with state-of-the-art simulation labs and clinical training
+                            centers.</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in-section">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2020</span>
+                        <h3>Innovation</h3>
+                        <p>Introduced modern teaching methodologies and technology-enhanced learning platforms for
+                            enhanced student experience.</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in-section">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2024</span>
+                        <h3>Excellence</h3>
+                        <p>Celebrated our 15th anniversary with over 500 graduates making significant contributions to
+                            healthcare across Nigeria and beyond.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Milestones Section -->
+    <section class="milestones-section">
+        <div class="container">
+            <div class="section-header fade-in-section">
+                <div class="subtitle">Our Achievements</div>
+                <h2>What We've Accomplished</h2>
+                <p>Numbers that reflect our commitment to excellence</p>
+            </div>
+            <div class="milestones-grid">
+                <div class="milestone-card fade-in-section">
+                    <div class="milestone-icon">🎓</div>
+                    <h3>500+</h3>
+                    <p>Graduates</p>
+                </div>
+                <div class="milestone-card fade-in-section">
+                    <div class="milestone-icon">🏆</div>
+                    <h3>15+</h3>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="milestone-card fade-in-section">
+                    <div class="milestone-icon">🏥</div>
+                    <h3>50+</h3>
+                    <p>Partner Hospitals</p>
+                </div>
+                <div class="milestone-card fade-in-section">
+                    <div class="milestone-icon">⭐</div>
+                    <h3>100%</h3>
+                    <p>Pass Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Be Part of Our Story</h2>
+                <p>Join us and become part of a legacy of compassionate, skilled nurses making a difference in
+                    healthcare.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">LC</div>
+                        <div class="logo-text">
+                            Legend College
+                            <span>of Nursing Sciences</span>
+                        </div>
+                    </a>
+                    <p>Committed to excellence in nursing education and producing world-class healthcare professionals.
+                    </p>
+
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Ambassador Plaza, Opp. Convaj Hotel</li>
+                        <li><i class="fas fa-map"></i> No. 2 Metu Uzodike Street, Okpuno Otolo, Nnewi</li>
+                        <li><i class="fas fa-phone"></i> +234 813 182 0224</li>
+                        <li><i class="fas fa-envelope"></i> info@legendcollege25@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Legend College of Nursing Sciences. All Rights Reserved.</p>
+                <div>
+                    <a href="#">Privacy Policy</a> |
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" onclick="scrollToTop()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </div>
+    <script src="/js/history.js"></script>
+</body>
+
+</html>

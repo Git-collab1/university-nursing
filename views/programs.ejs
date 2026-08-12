@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/programs.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <img src="/images/LEGEND_COLLEGE_LOGO_015925-removebg-preview.png" alt="">
+                </div>
+                <div class="logo-text">
+                    Legend College
+                    <span>of Nursing Sciences</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li class="dropdown">
+                    <a href="" class="nav-link">About</a>
+                    <div class="dropdown-menu">
+                        <a href="/about">Overview</a>
+                        <a href="/history">History</a>
+                        <a href="/mission">Mission & Vision</a>
+                    </div>
+                </li>
+                <li><a href="/admission" class="nav-link">Admission</a></li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+        <a href="/" onclick="toggleMobileMenu()">Home</a>
+        <div class="mobile-dropdown">
+            <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                About <span>&#9662;</span>
+            </a>
+            <div class="mobile-dropdown-menu">
+                <a href="/about">Overview</a>
+                <a href="/history">History</a>
+                <a href="/mission">Mission & Vision</a>
+            </div>
+        </div>
+        <a href="/admission" class="mobile-dropdown-toggle">Admission</a>
+        <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+    </div>
+
+    <!-- Programs Section -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Our Programs</h2>
+                <div class="divider"><span></span></div>
+                <p>Discover our comprehensive nursing programs designed to prepare you for a successful career in healthcare.</p>
+            </div>
+
+            <div class="programs-grid">
+                <!-- Nursing Program -->
+                <div class="program-card fade-in">
+                    <div class="program-icon">
+                        <i class="fas fa-user-nurse"></i>
+                    </div>
+                    <h3>Basic Nursing Program</h3>
+                    <p class="program-description">A comprehensive 3-year program leading to Registered Nurse (RN) certification. Combines theoretical knowledge with extensive clinical practice.</p>
+                    <ul class="program-details">
+                        <li><i class="fas fa-calendar-alt"></i> Duration: 3 Years</li>
+                        <li><i class="fas fa-user-graduate"></i> Qualification: RN</li>
+                        <li><i class="fas fa-hospital"></i> Clinical Hours: 1200+</li>
+                    </ul>
+                    <a href="/admission" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Midwifery Program -->
+                <div class="program-card fade-in">
+                    <div class="program-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h3>Midwifery Program</h3>
+                    <p class="program-description">Specialized training in maternal and child healthcare, preparing graduates to provide expert care during pregnancy, labor, and postpartum.</p>
+                    <ul class="program-details">
+                        <li><i class="fas fa-calendar-alt"></i> Duration: 3 Years</li>
+                        <li><i class="fas fa-user-graduate"></i> Qualification: Registered Midwife</li>
+                        <li><i class="fas fa-hospital"></i> Clinical Hours: 1000+</li>
+                    </ul>
+                    <a href="/admission" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Post-Basic Nursing -->
+                <div class="program-card fade-in">
+                    <div class="program-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3>Post-Basic Nursing Programs</h3>
+                    <p class="program-description">Advanced specialty programs for registered nurses seeking to specialize in areas like Critical Care, Pediatrics, or Community Health.</p>
+                    <ul class="program-details">
+                        <li><i class="fas fa-calendar-alt"></i> Duration: 1 Year</li>
+                        <li><i class="fas fa-user-graduate"></i> Qualification: Specialized RN</li>
+                        <li><i class="fas fa-hospital"></i> Clinical Hours: 800+</li>
+                    </ul>
+                    <a href="/admission" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Continuing Education -->
+                <div class="program-card fade-in">
+                    <div class="program-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Continuing Education</h3>
+                    <p class="program-description">Short courses and workshops for healthcare professionals seeking to update their skills and earn continuing education credits.</p>
+                    <ul class="program-details">
+                        <li><i class="fas fa-calendar-alt"></i> Duration: Various</li>
+                        <li><i class="fas fa-user-graduate"></i> Qualification: CE Certificates</li>
+                        <li><i class="fas fa-hospital"></i> Topics: Infection Control, Leadership, etc.</li>
+                    </ul>
+                    <a href="/admission" class="btn btn-primary">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">LC</div>
+                        <div class="logo-text">
+                            Legend College
+                            <span>of Nursing Sciences</span>
+                        </div>
+                    </a>
+                    <p>Committed to excellence in nursing education and producing world-class healthcare professionals.
+                    </p>
+
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Ambassador Plaza, Opp. Convaj Hotel</li>
+                        <li><i class="fas fa-map"></i> No. 2 Metu Uzodike Street, Okpuno Otolo, Nnewi</li>
+                        <li><i class="fas fa-phone"></i> +234 813 182 0224</li>
+                        <li><i class="fas fa-envelope"></i> info@legendcollege25@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Legend College of Nursing Sciences. All Rights Reserved.</p>
+                <div>
+                    <a href="#">Privacy Policy</a> |
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" onclick="scrollToTop()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </div>
+    <script src="/js/programs.js"></script>
+</body>
+
+</html>

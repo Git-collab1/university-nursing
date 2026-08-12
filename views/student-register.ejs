@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration | Legend College of Nursing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/admission.css">
+</head>
+
+<body>
+    <!-- Floating Social Media Buttons -->
+    <div class="floating-social">
+        <a href="https://facebook.com" target="_blank" class="facebook" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+<a href="https://wa.me/2348131820224" target="_blank" class="whatsapp" title="WhatsApp">
+             <i class="fab fa-whatsapp"></i>
+         </a>
+    </div>
+    
+    <!-- WhatsApp Contact Banner -->
+    <div style="position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px 20px; border-radius: 50px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); z-index: 1000; display: flex; align-items: center; gap: 10px;">
+        <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+        <div>
+            <div style="font-weight: 600; font-size: 0.9rem;">Need Help?</div>
+            <a href="https://wa.me/2348131820224" target="_blank" style="color: white; text-decoration: none; font-size: 0.8rem;">Chat with us</a>
+        </div>
+    </div>
+
+    <!-- Auth Page -->
+    <div class="auth-page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <a href="/admission" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Back to Admission
+                    </a>
+                    <h2>Create Account</h2>
+                    <p>Register to start your application</p>
+                </div>
+
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <div class="alert alert-error"><%= error %></div>
+                <% } %>
+
+                <form action="/student-register" method="POST" id="registerForm">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" name="password" placeholder="Create a password" required minlength="6">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Register</button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="/student-login">Login here</a></p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <i class="fab fa-whatsapp" style="color: #25d366;"></i> Need help? 
+                        <a href="https://wa.me/2348131820224" target="_blank" style="color: #25d366; font-weight: 600;">Chat on WhatsApp</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

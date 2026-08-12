@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Payments | Legend College</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/admission.css">
+    <style>
+        .payments-page {
+            padding: 120px 0 60px;
+            min-height: 100vh;
+            background: #f5f7fa;
+        }
+
+        .payments-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .payments-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .payments-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #1f2937;
+        }
+
+        .payments-count {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .payments-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .payments-table th {
+            background: #f9fafb;
+            padding: 14px 20px;
+            text-align: left;
+            font-weight: 600;
+            color: #6b7280;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .payments-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f3f4f6;
+            color: #1f2937;
+        }
+
+        .payments-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .payments-table tr:hover {
+            background: #f9fafb;
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .student-email {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .receipt-link {
+            color: #2980b9;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .receipt-link:hover {
+            text-decoration: underline;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-approve {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-approve:hover {
+            background: #059669;
+        }
+
+        .btn-reject {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-reject:hover {
+            background: #dc2626;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #d1d5db;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        .payment-reference {
+            font-family: monospace;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.3rem;
+            color: #1f2937;
+        }
+
+        .modal-body textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-body textarea:focus {
+            outline: none;
+            border-color: #2980b9;
+        }
+
+        .modal-footer {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn-cancel {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .btn-cancel:hover {
+            background: #d1d5db;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="logo">
+            <img src="/images/LEGEND_COLLEGE_LOGO_015925-removebg-preview.png" alt="Logo">
+            <h2>Admin Panel</h2>
+        </div>
+        <div class="user-info">
+            <span><a href="/admin-dashboard" style="color: #0D6E6E; text-decoration: none; margin-right: 15px;"><i class="fas fa-arrow-left"></i> Back to Dashboard</a></span>
+        </div>
+    </header>
+
+    <!-- Payments Page -->
+    <div class="payments-page">
+        <div class="container">
+            <div class="payments-card">
+                <div class="payments-header">
+                    <h2><i class="fas fa-money-check-alt"></i> Pending Payments</h2>
+                    <span class="payments-count"><%= students.length %> Pending</span>
+                </div>
+
+                <% if (students.length > 0) { %>
+                    <table class="payments-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Matric Number</th>
+                                <th>Payment Reference</th>
+                                <th>Date</th>
+                                <th>Receipt</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% students.forEach(function(student) { %>
+                                <tr>
+                                    <td>
+                                        <div class="student-name"><%= student.firstName %> <%= student.lastName %></div>
+                                        <div class="student-email"><%= student.email %></div>
+                                    </td>
+                                    <td>
+                                        <span class="receipt-link"><%= student.matricNumber || 'N/A' %></span>
+                                    </td>
+                                    <td>
+                                        <span class="payment-reference"><%= student.paymentReference || 'N/A' %></span>
+                                    </td>
+                                    <td>
+                                        <%= student.paymentDate ? new Date(student.paymentDate).toLocaleDateString() : 'N/A' %>
+                                    </td>
+                                    <td>
+                                        <% if (student.paymentReceipt) { %>
+                                            <a href="<%= student.paymentReceipt %>" target="_blank" class="receipt-link">
+                                                <i class="fas fa-receipt"></i> View Receipt
+                                            </a>
+                                        <% } else { %>
+                                            <span style="color: #9ca3af;">No receipt</span>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <form action="/admin/payments/approve" method="POST" style="display: inline;">
+                                                <input type="hidden" name="studentId" value="<%= student._id %>">
+                                                <button type="submit" class="btn btn-approve">
+                                                    <i class="fas fa-check"></i> Approve
+                                                </button>
+                                            </form>
+                                            <button type="button" class="btn btn-reject" onclick="openRejectModal('<%= student._id %>')">
+                                                <i class="fas fa-times"></i> Reject
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <div class="empty-state">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>No Pending Payments</h3>
+                        <p>All payment verifications are complete.</p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Modal -->
+    <div class="modal" id="rejectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reject Payment</h3>
+            </div>
+            <form id="rejectForm" method="POST" action="/admin/payments/reject">
+                <div class="modal-body">
+                    <input type="hidden" name="studentId" id="rejectStudentId">
+                    <label for="reason" style="display: block; margin-bottom: 8px; font-weight: 600; color: #374151;">Rejection Reason (optional):</label>
+                    <textarea name="reason" id="rejectReason" placeholder="Enter reason for rejection..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel" onclick="closeRejectModal()">Cancel</button>
+                    <button type="submit" class="btn btn-reject">Reject Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openRejectModal(studentId) {
+            document.getElementById('rejectStudentId').value = studentId;
+            document.getElementById('rejectModal').classList.add('show');
+        }
+
+        function closeRejectModal() {
+            document.getElementById('rejectModal').classList.remove('show');
+            document.getElementById('rejectStudentId').value = '';
+            document.getElementById('rejectReason').value = '';
+        }
+
+        document.getElementById('rejectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeRejectModal();
+            }
+        });
+    </script>
+
+    <footer class="footer" style="margin-top: 60px;">
+        <div class="container">
+            <div class="footer-grid" style="grid-template-columns: 1fr;">
+                <div class="footer-bottom" style="justify-content: center;">
+                    <p>&copy; 2026 Legend College of Nursing Sciences. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/index.js"></script>
+</body>
+
+</html>
