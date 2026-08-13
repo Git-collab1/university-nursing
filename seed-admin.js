@@ -6,7 +6,7 @@ const Admin = require('./models/Admin');
 const DEFAULT_ADMIN = {
   username: 'admin',
   email: 'admin@legendcollege.com',
-  password: 'admin123',
+  password: 'collegeadmin',
   role: 'admin',
   fullName: 'System Administrator'
 };
@@ -14,7 +14,7 @@ const DEFAULT_ADMIN = {
 const DEFAULT_STAFF = {
   username: 'staff',
   email: 'staff@legendcollege.com',
-  password: 'staff123',
+  password: 'collegestaff',
   role: 'staff',
   fullName: 'Admissions Staff'
 };
@@ -57,8 +57,8 @@ async function seed() {
     await ensureAccount(DEFAULT_STAFF);
 
     console.log('\n=== Login Credentials ===');
-    console.log('Admin: username=admin, password=admin123');
-    console.log('Staff: username=staff, password=staff123');
+    console.log('Admin: username=admin, password=collegeadmin');
+    console.log('Staff: username=staff, password=collegestaff');
     console.log('=========================\n');
 
     process.exit(0);

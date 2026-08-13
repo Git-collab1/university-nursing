@@ -738,8 +738,8 @@ router.post("/process-payment", requireStudent, upload.single('paymentReceipt'),
            <p>We have received your application for the <strong>${student.program}</strong> program.</p>
            <p>Your application ID is: <strong>${applicationId}</strong></p>
            <p>Your application of <strong>₦20,000</strong> has been submitted and is pending verification.</p>
-           <p>Our admissions team will review your application and get back to you within 5-7 days.</p>
-           <p>Best regards,<br>Legend College of Nursing Sciences</p>
+           <p>Our admissions team will review your application and get back to you within 48 hours.</p>
+           <p>Best regards,<br>Legend College of Nursing And Emergency Health Sciences Nnewi Sciences</p>
          </div>
        `;
        await sendEmail(student.email, studentSubject, studentHtml);
@@ -923,7 +923,7 @@ router.post("/admin/update-status", requireAdmin, async (req, res) => {
           <p>Dear <strong>${student.firstName} ${student.lastName}</strong>,</p>
           <p>Your application for the <strong>${student.program}</strong> program has been <strong>${statusText}</strong>.</p>
           ${status === 'approved' ? '<p>Congratulations! We look forward to welcoming you to Legend College of Nursing And Emergency Health Sciences Nnewi.</p>' : '<p>We regret to inform you that your application was not successful this time. We encourage you to apply again in the future.</p>'}
-          <p>Best regards,<br>Legend College of Nursing And Emergency Health Sciences Nmewi</p>
+          <p>Best regards,<br>Legend College of Nursing And Emergency Health Sciences Nnewi</p>
         </div>
       `;
       await sendEmail(student.email, subject, html);

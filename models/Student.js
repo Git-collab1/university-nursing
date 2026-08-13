@@ -164,7 +164,7 @@ const studentSchema = new mongoose.Schema({
   // Choice of Course
   program: {
     type: String,
-    enum: ['HND Nursing', 'BNS.c Nursing', ''],
+    enum: ['HND Nursing', 'BNSc Nursing', ''],
     default: ''
   },
   programTransfer: {
