@@ -522,7 +522,11 @@ router.post("/student-login", asyncHandler(async (req, res) => {
 }));
 
 // Student Submit Form - saves form data with file upload
-router.post("/student-submit-form", requireStudent, upload.single('passportPhoto'), async (req, res) => {
+router.post("/student-submit-form", requireStudent, upload.fields([
+  { name: 'passportPhoto', maxCount: 1 },
+  { name: 'waecResult', maxCount: 1 },
+  { name: 'necoResult', maxCount: 1 }
+]), async (req, res) => {
   try {
     const {
       // Application Details
@@ -569,9 +573,17 @@ router.post("/student-submit-form", requireStudent, upload.single('passportPhoto
     student.receiptNo = receiptNo || '';
     student.applicationDate = applicationDate ? new Date(applicationDate) : new Date();
 
-    // Handle passport photo upload
-    if (req.file) {
-      student.passportPhoto = '/uploads/' + req.file.filename;
+    // Handle file uploads
+    if (req.files) {
+      if (req.files['passportPhoto']) {
+        student.passportPhoto = '/uploads/' + req.files['passportPhoto'][0].filename;
+      }
+      if (req.files['waecResult']) {
+        student.waecResult = '/uploads/' + req.files['waecResult'][0].filename;
+      }
+      if (req.files['necoResult']) {
+        student.necoResult = '/uploads/' + req.files['necoResult'][0].filename;
+      }
     }
 
     // Personal Information
@@ -638,29 +650,6 @@ router.post("/student-submit-form", requireStudent, upload.single('passportPhoto
     student.previousSchool = previousSchool || '';
     student.oLevelResult = oLevelResult || '';
 
-    // Save examination results from table
-    const examinationResults = [];
-    for (let i = 1; i <= 9; i++) {
-      const examName = req.body[`exam${i}Name`];
-      const examDate = req.body[`exam${i}Date`];
-      const examNo = req.body[`exam${i}No`];
-      const examSubject = req.body[`exam${i}Subject`];
-      const examGrade = req.body[`exam${i}Grade`];
-
-      if (examName || examDate || examNo || examSubject || examGrade) {
-        examinationResults.push({
-          examinationName: examName || '',
-          examinationDate: examDate || '',
-          examinationNo: examNo || '',
-          subjects: [{
-            subject: examSubject || '',
-            grade: examGrade || ''
-          }]
-        });
-      }
-    }
-    student.examinationResults = examinationResults;
-
     // Introduction
     student.introductionSource = introductionSource || '';
     student.otherSource = otherSource || '';
@@ -678,11 +667,23 @@ router.post("/student-submit-form", requireStudent, upload.single('passportPhoto
 
   } catch (error) {
     console.error("Form submission error:", error);
+
+    let errorMessage = "Failed to save form. Please try again.";
+
+    if (error.code === 11000) {
+      errorMessage = "This email is already registered. Please use a different email.";
+    } else if (error.name === 'ValidationError') {
+      const validationErrors = Object.values(error.errors).map(e => e.message);
+      errorMessage = "Validation error: " + validationErrors.join(', ');
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+
     const student = await Student.findById(req.session.studentId);
     res.render("student-form", {
       title: "Application Form | Legend College",
       student,
-      error: "Failed to save form. Please try again."
+      error: errorMessage
     });
   }
 });

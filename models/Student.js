@@ -54,7 +54,8 @@ const studentSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ['Male', 'Female', '']
+    enum: ['Male', 'Female', ''],
+    default: ''
   },
   maritalStatus: {
     type: String,
@@ -184,6 +185,16 @@ const studentSchema = new mongoose.Schema({
     default: ''
   },
 
+  // Education - Examination Results Uploads
+  waecResult: {
+    type: String,
+    default: ''
+  },
+  necoResult: {
+    type: String,
+    default: ''
+  },
+
   // Education - Examination Results Table
   examinationResults: [{
     examinationName: { type: String, default: '' },
@@ -244,7 +255,7 @@ const studentSchema = new mongoose.Schema({
    },
     paymentAmount: {
       type: Number,
-      default: 15000
+      default: 20000
     },
    paymentReference: {
      type: String

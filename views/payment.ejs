@@ -199,6 +199,55 @@
         .form-actions .btn-primary {
             flex: 2;
         }
+
+        @media (max-width: 480px) {
+            .payment-page {
+                padding: 100px 10px 40px;
+            }
+
+            .payment-card {
+                padding: 25px 16px;
+                border-radius: 16px;
+            }
+
+            .payment-header h1 {
+                font-size: 1.35rem;
+            }
+
+            .payment-header p {
+                font-size: 0.9rem;
+            }
+
+            .payment-amount {
+                padding: 18px;
+                margin: 20px 0;
+            }
+
+            .payment-amount .amount {
+                font-size: 2rem;
+            }
+
+            .bank-detail-row {
+                flex-direction: column;
+                gap: 4px;
+                padding: 10px 0;
+            }
+
+            .bank-detail-value.account-number {
+                font-size: 1.1rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .form-actions .btn-outline,
+            .form-actions .btn-primary {
+                flex: 1 1 auto;
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
