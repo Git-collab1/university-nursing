@@ -454,10 +454,10 @@
         <div class="container">
             <div class="application-form">
                 <% if (typeof error !=='undefined' && error) { %>
-                    <div class="alert alert-error">
-                        <%= error %>
+                    <div class="alert alert-error" style="font-size: 1.1rem; padding: 18px 22px;">
+                        <strong><i class="fas fa-exclamation-circle"></i> Error:</strong> <%= error %>
                     </div>
-                    <% } %>
+                <% } %>
 
                         <form action="/student-submit-form" method="POST" id="applicationForm"
                             enctype="multipart/form-data" class="comprehensive-form">
