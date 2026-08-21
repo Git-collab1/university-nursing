@@ -455,9 +455,10 @@
             <div class="application-form">
                 <% if (typeof error !=='undefined' && error) { %>
                     <div class="alert alert-error" style="font-size: 1.1rem; padding: 18px 22px;">
-                        <strong><i class="fas fa-exclamation-circle"></i> Error:</strong> <%= error %>
+                        <strong><i class="fas fa-exclamation-circle"></i> Error:</strong>
+                        <%= error %>
                     </div>
-                <% } %>
+                    <% } %>
 
                         <form action="/student-submit-form" method="POST" id="applicationForm"
                             enctype="multipart/form-data" class="comprehensive-form">
@@ -1031,11 +1032,13 @@
             }
         }
 
-        // Form submit handler - show loading state and ensure redirect
+        // Form submit handler - show loading state
         const applicationForm = document.getElementById('applicationForm');
+
         if (applicationForm) {
-            applicationForm.addEventListener('submit', function(e) {
+            applicationForm.addEventListener('submit', function (e) {
                 const submitBtn = applicationForm.querySelector('.submit-btn');
+
                 if (submitBtn) {
                     submitBtn.textContent = 'Submitting... Please wait';
                     submitBtn.disabled = true;
@@ -1043,12 +1046,13 @@
                     submitBtn.style.cursor = 'not-allowed';
                 }
 
-                // Fallback: if page doesn't redirect in 5 seconds, go to payment
-                setTimeout(function() {
-                    if (document.querySelector('.submit-btn') && document.querySelector('.submit-btn').textContent.includes('Submitting')) {
-                        window.location.href = '/payment';
-                    }
-                }, 5000);
+                // IMPORTANT:
+                // Do NOT redirect manually here.
+                // The server will redirect to /payment after:
+                // 1. Multer finishes receiving the files
+                // 2. Cloudinary finishes uploading
+                // 3. MongoDB saves the student
+                // 4. res.redirect("/payment") executes
             });
         }
     </script>
