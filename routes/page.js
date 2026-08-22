@@ -19,29 +19,41 @@ const uploadToCloudinary = require("../utils/uploadToCloudinary");
 
 // Store uploaded files in memory temporarily.
 // Files are then uploaded directly to Cloudinary.
+// ========================================================
+// MULTER CONFIGURATION
+// ========================================================
+
 const storage = multer.memoryStorage();
 
 const upload = multer({
-  storage,
+  storage: storage,
 
   limits: {
-    fileSize: 5 * 1024 * 1024 // 5MB
+    fileSize: 5 * 1024 * 1024
   },
 
   fileFilter: function (req, file, cb) {
-    const allowedTypes = /jpeg|jpg|png|gif|webp|pdf/;
+    console.log("Multer received file:", {
+      fieldname: file.fieldname,
+      originalname: file.originalname,
+      mimetype: file.mimetype
+    });
 
-    const extname = allowedTypes.test(
-      path.extname(file.originalname).toLowerCase()
-    );
+    const allowedMimeTypes = [
+      "image/jpeg",
+      "image/png",
+      "application/pdf"
+    ];
 
-    const mimetype = allowedTypes.test(file.mimetype);
-
-    if (extname && mimetype) {
-      return cb(null, true);
+    if (!allowedMimeTypes.includes(file.mimetype)) {
+      return cb(
+        new Error(
+          "Invalid file type. Only JPG, JPEG, PNG and PDF files are allowed."
+        )
+      );
     }
 
-    return cb(null, false);
+    cb(null, true);
   }
 });
 
@@ -1271,25 +1283,91 @@ router.post(
 
   requireStudent,
 
-  upload.single("paymentReceipt"),
+  // Handle payment receipt upload separately so upload errors
+  // can be shown nicely on the payment page.
+  (req, res, next) => {
+    upload.single("paymentReceipt")(req, res, async (err) => {
+      if (err) {
+        console.error("=== PAYMENT UPLOAD ERROR ===");
+        console.error("Error name:", err.name);
+        console.error("Error message:", err.message);
+        console.error("Error code:", err.code);
+        console.error("============================");
+
+        try {
+          const student = await Student.findById(
+            req.session.studentId
+          );
+
+          let errorMessage =
+            err.message ||
+            "Unable to upload payment receipt. Please try again.";
+
+          if (err.code === "LIMIT_FILE_SIZE") {
+            errorMessage =
+              "Payment receipt is too large. Maximum file size is 5MB.";
+          }
+
+          return res.render("payment", {
+            title: "Payment | Legend College",
+            student,
+            error: errorMessage,
+            success: null
+          });
+        } catch (studentError) {
+          console.error(
+            "Error loading student after upload failure:",
+            studentError
+          );
+
+          return res.redirect("/payment");
+        }
+      }
+
+      next();
+    });
+  },
 
   asyncHandler(async (req, res) => {
     try {
+      // ------------------------------------------------
+      // GET PAYMENT FORM DATA
+      // ------------------------------------------------
+
       const {
         transactionId,
         bankName,
         paymentDate
       } = req.body;
 
-      const student =
-        await Student.findById(
-          req.session.studentId
-        );
+      console.log("=== PAYMENT SUBMISSION STARTED ===");
+
+      console.log("Payment body:", {
+        transactionId,
+        bankName,
+        paymentDate
+      });
+
+      console.log("Payment file:", req.file
+        ? {
+          originalname: req.file.originalname,
+          mimetype: req.file.mimetype,
+          size: req.file.size
+        }
+        : "No file"
+      );
+
+      // ------------------------------------------------
+      // FIND STUDENT
+      // ------------------------------------------------
+
+      const student = await Student.findById(
+        req.session.studentId
+      );
 
       if (!student) {
-        return res.redirect(
-          "/student-login"
-        );
+        req.session.destroy(() => { });
+        return res.redirect("/student-login");
       }
 
       // ------------------------------------------------
@@ -1300,27 +1378,41 @@ router.post(
         !student.firstName ||
         !student.program
       ) {
-        return res.redirect(
-          "/student-form"
-        );
+        return res.redirect("/student-form");
       }
 
       // ------------------------------------------------
-      // VALIDATE PAYMENT
+      // CHECK IF ALREADY PAID
       // ------------------------------------------------
 
-      if (
-        !transactionId ||
-        !bankName
-      ) {
+      if (student.paymentStatus === "paid") {
+        return res.redirect("/student-dashboard");
+      }
+
+      // ------------------------------------------------
+      // VALIDATE PAYMENT DETAILS
+      // ------------------------------------------------
+
+      if (!transactionId || !bankName) {
         return res.render("payment", {
-          title:
-            "Payment | Legend College",
-
+          title: "Payment | Legend College",
           student,
+          error: "Please fill in all required payment fields.",
+          success: null
+        });
+      }
 
+      // ------------------------------------------------
+      // VALIDATE RECEIPT
+      // ------------------------------------------------
+
+      if (!req.file) {
+        return res.render("payment", {
+          title: "Payment | Legend College",
+          student,
           error:
-            "Please fill in all required fields"
+            "Please upload your payment receipt before submitting.",
+          success: null
         });
       }
 
@@ -1328,11 +1420,10 @@ router.post(
       // PAYMENT INFORMATION
       // ------------------------------------------------
 
-      student.paymentStatus =
-        "pending";
+      student.paymentStatus = "pending";
 
       student.paymentReference =
-        transactionId;
+        transactionId.trim();
 
       student.paymentDate =
         paymentDate
@@ -1343,29 +1434,41 @@ router.post(
         bankName;
 
       // ------------------------------------------------
-      // PAYMENT RECEIPT → CLOUDINARY
+      // UPLOAD PAYMENT RECEIPT TO CLOUDINARY
       // ------------------------------------------------
 
-      if (req.file) {
-        console.log(
-          "Uploading payment receipt to Cloudinary..."
+      console.log(
+        "Uploading payment receipt to Cloudinary..."
+      );
+
+      try {
+        const result = await uploadToCloudinary(
+          req.file.buffer,
+          "legend-college/payment-receipts",
+          "auto"
         );
-
-        const result =
-          await uploadToCloudinary(
-            req.file.buffer,
-
-            "legend-college/payment-receipts",
-
-            "auto"
-          );
 
         student.paymentReceipt =
           result.secure_url;
 
         console.log(
-          "Payment receipt uploaded successfully."
+          "Payment receipt uploaded successfully:",
+          result.secure_url
         );
+
+      } catch (cloudinaryError) {
+        console.error(
+          "Payment receipt Cloudinary upload failed:",
+          cloudinaryError
+        );
+
+        return res.render("payment", {
+          title: "Payment | Legend College",
+          student,
+          error:
+            "Your receipt could not be uploaded. Please try again.",
+          success: null
+        });
       }
 
       // ------------------------------------------------
@@ -1376,6 +1479,10 @@ router.post(
         "submitted";
 
       await student.save();
+
+      console.log(
+        "Student application saved successfully."
+      );
 
       // ------------------------------------------------
       // APPLICATION ID
@@ -1453,6 +1560,10 @@ router.post(
           student.email,
           studentSubject,
           studentHtml
+        );
+
+        console.log(
+          "Student confirmation email sent."
         );
 
       } catch (emailError) {
@@ -1596,6 +1707,10 @@ router.post(
           adminHtml
         );
 
+        console.log(
+          "Admin notification email sent."
+        );
+
       } catch (emailError) {
         console.error(
           "Admin email error:",
@@ -1607,7 +1722,11 @@ router.post(
       // SUCCESS PAGE
       // =================================================
 
-      res.render("success", {
+      console.log(
+        "=== PAYMENT SUBMISSION COMPLETED ==="
+      );
+
+      return res.render("success", {
         title:
           "Application Submitted | Legend College",
 
@@ -1619,24 +1738,36 @@ router.post(
 
     } catch (error) {
       console.error(
-        "Payment error:",
+        "Payment processing error:",
         error
       );
 
-      const student =
-        await Student.findById(
-          req.session.studentId
+      try {
+        const student =
+          await Student.findById(
+            req.session.studentId
+          );
+
+        return res.render("payment", {
+          title:
+            "Payment | Legend College",
+
+          student,
+
+          error:
+            "Payment processing failed. Please try again.",
+
+          success: null
+        });
+
+      } catch (renderError) {
+        console.error(
+          "Payment error page failed:",
+          renderError
         );
 
-      res.render("payment", {
-        title:
-          "Payment | Legend College",
-
-        student,
-
-        error:
-          "Payment processing failed. Please try again."
-      });
+        return res.redirect("/payment");
+      }
     }
   })
 );
@@ -1824,9 +1955,9 @@ router.post(
           pending: students.filter(
             (student) =>
               student.applicationStatus ===
-                "submitted" ||
+              "submitted" ||
               student.applicationStatus ===
-                "under_review"
+              "under_review"
           ).length,
 
           approved: students.filter(
@@ -1914,9 +2045,8 @@ router.post(
               <strong>${statusText}</strong>.
             </p>
 
-            ${
-              status === "approved"
-                ? `
+            ${status === "approved"
+            ? `
                   <p>
                     Congratulations! We look forward
                     to welcoming you to Legend College
@@ -1924,7 +2054,7 @@ router.post(
                     Sciences Nnewi.
                   </p>
                 `
-                : `
+            : `
                   <p>
                     We regret to inform you that your
                     application was not successful this
@@ -1932,7 +2062,7 @@ router.post(
                     in the future.
                   </p>
                 `
-            }
+          }
 
             <p>
               Best regards,<br>
@@ -1988,9 +2118,9 @@ router.post(
         pending: students.filter(
           (student) =>
             student.applicationStatus ===
-              "submitted" ||
+            "submitted" ||
             student.applicationStatus ===
-              "under_review"
+            "under_review"
         ).length,
 
         approved: students.filter(
