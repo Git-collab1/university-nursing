@@ -1551,39 +1551,3 @@
      padding: 10px 12px;
      font-size: 0.85rem;
    }
-
-   /* Footer */
-   .footer {
-     padding: 1.5rem 10px 1rem;
-   }
-
-   .footer-grid {
-     gap: 1rem;
-   }
-
-   .footer-brand .logo-icon {
-     width: 30px;
-     height: 30px;
-   }
-
-   .footer-brand .logo-text {
-     font-size: 0.9rem;
-   }
-
-   .footer-brand p {
-     font-size: 0.8rem;
-   }
-
-   .footer-column h3 {
-     font-size: 1rem;
-   }
-
-   .footer-column ul li a,
-   .footer-column ul li i {
-     font-size: 0.8rem;
-   }
-
-   .footer-bottom {
-     font-size: 0.8rem;
-   }
- }

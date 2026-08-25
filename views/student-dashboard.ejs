@@ -3,153 +3,1501 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Student Dashboard | Legend College of Nursing</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/admission.css">
+
+    <style>
+        .dashboard-content {
+            padding: 25px;
+            padding-bottom: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        }
+
+        .dashboard-card h3 {
+            color: #00695c;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(180px, 1fr)
+            );
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .status-box {
+            background: #f7faf9;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .status-box .label {
+            display: block;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .status-box .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #263238;
+        }
+
+        .interview-card {
+            border: 2px solid #00695c;
+            background: #f3fbf9;
+        }
+
+        .interview-card.pending {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .interview-card.completed {
+            border-color: #2e7d32;
+            background: #f1f8f2;
+        }
+
+        .interview-card.physical {
+            border-color: #1565c0;
+            background: #f3f8ff;
+        }
+
+        .interview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .interview-header h3 {
+            margin: 0;
+        }
+
+        .interview-type {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            background: #00695c;
+            color: #fff;
+        }
+
+        .interview-type.physical {
+            background: #1565c0;
+        }
+
+        .interview-type.completed {
+            background: #2e7d32;
+        }
+
+        .interview-subjects {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(180px, 1fr)
+            );
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .subject-item {
+            padding: 14px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            display: flex;
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .subject-item strong {
+            color: #263238;
+        }
+
+        .subject-time {
+            color: #00695c;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .interview-score {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(150px, 1fr)
+            );
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .score-box {
+            padding: 18px;
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .score-box .score-value {
+            display: block;
+            font-size: 28px;
+            font-weight: 700;
+            color: #00695c;
+        }
+
+        .score-box .score-label {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .interview-btn {
+            display: inline-block;
+            background: #00695c;
+            color: #fff;
+            text-decoration: none;
+            padding: 13px 28px;
+            border-radius: 7px;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .interview-btn:hover {
+            background: #004d40;
+        }
+
+        .interview-btn.blue {
+            background: #1565c0;
+        }
+
+        .interview-btn.blue:hover {
+            background: #0d47a1;
+        }
+
+        .interview-btn.green {
+            background: #2e7d32;
+        }
+
+        .interview-btn.green:hover {
+            background: #1b5e20;
+        }
+
+        .interview-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .progress-step .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #ddd;
+            color: #666;
+
+            flex-shrink: 0;
+        }
+
+        .progress-step.complete .icon {
+            background: #2e7d32;
+            color: #fff;
+        }
+
+        .progress-step.current .icon {
+            background: #00695c;
+            color: #fff;
+        }
+
+        .progress-step.pending .icon {
+            background: #eceff1;
+            color: #777;
+        }
+
+        .progress-step-text strong {
+            display: block;
+            color: #263238;
+        }
+
+        .progress-step-text span {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .applications-table {
+            overflow-x: auto;
+        }
+
+        .applications-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .applications-table th,
+        .applications-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        .applications-table th {
+            background: #f7f9f9;
+            color: #00695c;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .status-badge.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-badge.paid {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.unpaid {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-badge.form_completed,
+        .status-badge.payment_submitted {
+            background: #e3f2fd;
+            color: #0d47a1;
+        }
+
+        .status-badge.payment_verified,
+        .status-badge.interview_pending {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .status-badge.interview_started {
+            background: #e0f2f1;
+            color: #004d40;
+        }
+
+        .status-badge.interview_completed,
+        .status-badge.approved {
+            background: #dcedc8;
+            color: #33691e;
+        }
+
+        .status-badge.under_review {
+            background: #ede7f6;
+            color: #4527a0;
+        }
+
+        .status-badge.rejected {
+            background: #ffebee;
+            color: #b71c1c;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-error {
+            background: #ffebee;
+            color: #b71c1c;
+            border: 1px solid #ef9a9a;
+        }
+
+        .info-list {
+            margin: 10px 0 0 20px;
+            padding: 0;
+        }
+
+        .info-list li {
+            margin-bottom: 7px;
+            color: #555;
+        }
+
+        @media (max-width: 700px) {
+            .dashboard-content {
+                padding: 15px;
+            }
+
+            .interview-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .applications-table th,
+            .applications-table td {
+                white-space: nowrap;
+            }
+        }
+    </style>
 </head>
 
 <body class="dashboard-page">
-    <!-- Dashboard Header -->
+
+    <!-- ================================================== -->
+    <!-- HEADER -->
+    <!-- ================================================== -->
+
     <header class="dashboard-header">
+
         <div class="logo">
-            <img src="/images/LEGEND_COLLEGE_LOGO_015925-removebg-preview.png" alt="Logo">
-            <h2>Student Dashboard</h2>
+
+            <img
+                src="/images/LEGEND_COLLEGE_LOGO_015925-removebg-preview.png"
+                alt="Legend College Logo"
+            >
+
+            <h2>
+                Student Dashboard
+            </h2>
+
         </div>
+
         <div class="user-info">
-            <span>Welcome, <strong><%= student ? (student.firstName || 'Student') : 'Student' %></strong></span>
-            <a href="/student-logout" class="logout-btn">Logout</a>
+
+            <span>
+                Welcome,
+
+                <strong>
+                    <%= student && student.firstName
+                        ? student.firstName
+                        : "Student"
+                    %>
+                </strong>
+            </span>
+
+            <a
+                href="/student-logout"
+                class="logout-btn"
+            >
+                Logout
+            </a>
+
         </div>
+
     </header>
 
-    <!-- Dashboard Content -->
+
+    <!-- ================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ================================================== -->
+
     <div class="dashboard-content">
 
-        <% if (typeof error !== 'undefined' && error) { %>
-            <div class="alert alert-error"><%= error %></div>
+        <!-- ERROR -->
+        <% if (
+            typeof error !== "undefined" &&
+            error
+        ) { %>
+
+            <div class="alert alert-error">
+                <%= error %>
+            </div>
+
         <% } %>
 
-        <!-- Application Status Card -->
-        <div class="applications-table">
-            <h3>Your Application Status</h3>
+
+        <!-- ================================================== -->
+        <!-- APPLICATION STATUS -->
+        <!-- ================================================== -->
+
+        <div class="dashboard-card applications-table">
+
+            <h3>
+                Your Application Status
+            </h3>
 
             <% if (student) { %>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Application ID</th>
-                        <th>Program</th>
-                        <th>Payment Status</th>
-                        <th>Application Status</th>
-                        <th>Date Applied</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>LCN-<%= student._id.toString().slice(-8).toUpperCase() %></td>
-                        <td><%= student.program || 'Not selected' %></td>
-                        <td>
-                            <span class="status-badge <%= student.paymentStatus %>">
-                                <%= student.paymentStatus %>
-                            </span>
-                        </td>
-                        <td>
-                            <span class="status-badge <%= student.applicationStatus %>">
-                                <%= student.applicationStatus.replace('_', ' ') %>
-                            </span>
-                        </td>
-                        <td><%= student.createdAt ? new Date(student.createdAt).toLocaleDateString() : 'N/A' %></td>
-                    </tr>
-                </tbody>
-            </table>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Application ID</th>
+                            <th>Program</th>
+                            <th>Payment Status</th>
+                            <th>Application Status</th>
+                            <th>Date Applied</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                LCN-<%=
+                                    student._id
+                                        .toString()
+                                        .slice(-8)
+                                        .toUpperCase()
+                                %>
+                            </td>
+
+                            <td>
+                                <%= student.program || "Not selected" %>
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="status-badge <%= student.paymentStatus || 'unpaid' %>"
+                                >
+                                    <%= student.paymentStatus || "unpaid" %>
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="status-badge <%= student.applicationStatus || 'not_started' %>"
+                                >
+                                   <%= (student.applicationStatus || 'not_started').replace(/_/g, ' ') %>
+                                </span>
+
+                            </td>
+
+                            <td>
+                                <%=
+                                    student.createdAt
+                                        ? new Date(
+                                            student.createdAt
+                                        ).toLocaleDateString()
+                                        : "N/A"
+                                %>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
             <% } %>
+
         </div>
 
-        <!-- Action Buttons based on status -->
-        <div style="margin-top: 30px;">
-            <% if (!student.firstName || !student.program) { %>
-                <!-- Form not filled yet -->
-                <div class="applications-table">
-                    <h3><i class="fas fa-clipboard-list"></i> Step 1: Fill Application Form</h3>
-                    <p>Please complete your application form with all required information.</p>
-                    <a href="/student-form" class="submit-btn" style="display: inline-block; width: auto; padding: 14px 40px; margin-top: 15px;">
-                        <i class="fas fa-edit"></i> Fill Application Form
-                    </a>
+
+        <!-- ================================================== -->
+        <!-- APPLICATION PROGRESS -->
+        <!-- ================================================== -->
+
+        <% if (student) { %>
+
+            <div class="dashboard-card">
+
+                <h3>
+                    <i class="fas fa-list-check"></i>
+                    Application Progress
+                </h3>
+
+
+                <!-- STEP 1 -->
+
+                <div class="progress-step
+                    <%= student.firstName && student.program
+                        ? "complete"
+                        : "current"
+                    %>"
+                >
+
+                    <div class="icon">
+
+                        <% if (
+                            student.firstName &&
+                            student.program
+                        ) { %>
+
+                            <i class="fas fa-check"></i>
+
+                        <% } else { %>
+
+                            1
+
+                        <% } %>
+
+                    </div>
+
+                    <div class="progress-step-text">
+
+                        <strong>
+                            Application Form
+                        </strong>
+
+                        <span>
+
+                            <%= student.firstName &&
+                                student.program
+                                ? "Completed"
+                                : "Not completed"
+                            %>
+
+                        </span>
+
+                    </div>
+
                 </div>
-            <% } else if (student.paymentStatus !== 'paid') { %>
-                <!-- Form filled, but not paid -->
-                <div class="applications-table">
-                    <h3><i class="fas fa-credit-card"></i> Step 2: Pay Application Fee</h3>
-                    <p>Your application form has been saved. Please pay the ₦20,000 application fee to complete your submission.</p>
-                    <a href="/payment" class="submit-btn" style="display: inline-block; width: auto; padding: 14px 40px; margin-top: 15px;">
-                        <i class="fas fa-credit-card"></i> Pay ₦20,000
-                    </a>
+
+
+                <!-- STEP 2 -->
+
+                <div class="progress-step
+                    <%= student.paymentStatus === "paid"
+                        ? "complete"
+                        : student.firstName && student.program
+                            ? "current"
+                            : "pending"
+                    %>"
+                >
+
+                    <div class="icon">
+
+                        <% if (
+                            student.paymentStatus === "paid"
+                        ) { %>
+
+                            <i class="fas fa-check"></i>
+
+                        <% } else { %>
+
+                            2
+
+                        <% } %>
+
+                    </div>
+
+                    <div class="progress-step-text">
+
+                        <strong>
+                            Application + Screening Fee
+                        </strong>
+
+                        <span>
+
+                            <% if (
+                                student.paymentStatus === "paid"
+                            ) { %>
+
+                                Payment verified
+
+                            <% } else if (
+                                student.paymentStatus === "pending"
+                            ) { %>
+
+                                Payment submitted - awaiting verification
+
+                            <% } else { %>
+
+                                Payment not completed
+
+                            <% } %>
+
+                        </span>
+
+                    </div>
+
                 </div>
+
+
+                <!-- STEP 3 -->
+
+                <div class="progress-step
+                    <%= interview &&
+                        interview.status === "completed"
+                        ? "complete"
+                        : interview
+                            ? "current"
+                            : "pending"
+                    %>"
+                >
+
+                    <div class="icon">
+
+                        <% if (
+                            interview &&
+                            interview.status === "completed"
+                        ) { %>
+
+                            <i class="fas fa-check"></i>
+
+                        <% } else { %>
+
+                            3
+
+                        <% } %>
+
+                    </div>
+
+                    <div class="progress-step-text">
+
+                        <strong>
+                            Admission Interview
+                        </strong>
+
+                        <span>
+
+                            <% if (
+                                interview &&
+                                interview.status === "completed"
+                            ) { %>
+
+                                Interview completed
+
+                            <% } else if (
+                                interview &&
+                                interview.status === "in_progress"
+                            ) { %>
+
+                                Interview in progress
+
+                            <% } else if (interview) { %>
+
+                                Interview ready
+
+                            <% } else { %>
+
+                                Waiting for payment verification
+
+                            <% } %>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STEP 4 -->
+
+                <div class="progress-step
+                    <%= student.applicationStatus === "approved"
+                        ? "complete"
+                        : student.applicationStatus === "under_review"
+                            ? "current"
+                            : "pending"
+                    %>"
+                >
+
+                    <div class="icon">
+
+                        <% if (
+                            student.applicationStatus === "approved"
+                        ) { %>
+
+                            <i class="fas fa-check"></i>
+
+                        <% } else { %>
+
+                            4
+
+                        <% } %>
+
+                    </div>
+
+                    <div class="progress-step-text">
+
+                        <strong>
+                            Admission Decision
+                        </strong>
+
+                        <span>
+
+                            <% if (
+                                student.applicationStatus === "approved"
+                            ) { %>
+
+                                Approved
+
+                            <% } else if (
+                                student.applicationStatus === "rejected"
+                            ) { %>
+
+                                Application rejected
+
+                            <% } else if (
+                                student.applicationStatus === "under_review"
+                            ) { %>
+
+                                Under review
+
+                            <% } else { %>
+
+                                Pending interview
+
+                            <% } %>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        <% } %>
+
+
+        <!-- ================================================== -->
+        <!-- ACTION SECTION -->
+        <!-- ================================================== -->
+
+        <% if (student) { %>
+
+
+            <!-- ============================================== -->
+            <!-- FORM NOT COMPLETED -->
+            <!-- ============================================== -->
+
+            <% if (
+                !student.firstName ||
+                !student.program
+            ) { %>
+
+                <div class="dashboard-card">
+
+                    <h3>
+                        <i class="fas fa-clipboard-list"></i>
+                        Step 1: Complete Application Form
+                    </h3>
+
+                    <p>
+                        Please complete your application form
+                        before proceeding to payment.
+                    </p>
+
+                    <a
+                        href="/student-form"
+                        class="interview-btn"
+                    >
+                        <i class="fas fa-edit"></i>
+                        Complete Application Form
+                    </a>
+
+                </div>
+
+
+            <!-- ============================================== -->
+            <!-- PAYMENT NOT PAID -->
+            <!-- ============================================== -->
+
+            <% } else if (
+                student.paymentStatus !== "paid"
+            ) { %>
+
+                <div class="dashboard-card">
+
+                    <h3>
+                        <i class="fas fa-credit-card"></i>
+                        Step 2: Application + Screening Fee
+                    </h3>
+
+
+                    <% if (
+                        student.paymentStatus === "pending"
+                    ) { %>
+
+                        <div class="interview-message">
+
+                            <strong>
+                                Payment submitted.
+                            </strong>
+
+                            <p>
+                                Your ₦27,500 payment receipt
+                                is waiting for verification
+                                by the admissions team.
+                            </p>
+
+                        </div>
+
+
+                    <% } else { %>
+
+                        <p>
+                            Please pay
+                            <strong>₦27,500</strong>
+                            for the application fee together
+                            with the screening fee.
+                        </p>
+
+                        <a
+                            href="/payment"
+                            class="interview-btn"
+                        >
+                            <i class="fas fa-credit-card"></i>
+                            Pay ₦27,500
+                        </a>
+
+                    <% } %>
+
+
+                    <% if (
+                        student.paymentRejectionReason
+                    ) { %>
+
+                        <div
+                            class="interview-message"
+                            style="
+                                border-left: 4px solid #c62828;
+                            "
+                        >
+
+                            <strong>
+                                Payment issue:
+                            </strong>
+
+                            <p>
+                                <%= student.paymentRejectionReason %>
+                            </p>
+
+                            <a
+                                href="/payment"
+                                class="interview-btn"
+                            >
+                                Submit Payment Again
+                            </a>
+
+                        </div>
+
+                    <% } %>
+
+                </div>
+
+
+            <!-- ============================================== -->
+            <!-- PAYMENT VERIFIED -->
+            <!-- ============================================== -->
+
             <% } else { %>
-                <!-- Application submitted -->
-                <div class="applications-table">
-                    <h3><i class="fas fa-check-circle"></i> Application Submitted</h3>
-                    <p>Your application has been submitted successfully. We will review it and get back to you within 5-7 business days.</p>
-                </div>
-            <% } %>
-        </div>
 
-        <!-- Personal Information -->
-        <% if (student && student.firstName) { %>
-        <div class="applications-table" style="margin-top: 30px;">
-            <h3>Your Information</h3>
-            <table>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Full Name:</strong></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.firstName %> <%= student.lastName %></td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Email:</strong></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.email %></td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Phone:</strong></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.phone %></td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Date of Birth:</strong></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.dateOfBirth ? new Date(student.dateOfBirth).toLocaleDateString() : 'N/A' %></td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Gender:</strong></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.gender || 'N/A' %></td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Address:</strong></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.address ? student.address.street + ', ' + student.address.city + ', ' + student.address.state + ', ' + student.address.country : 'N/A' %></td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Guardian:</strong></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.guardianName ? student.guardianName + ' (' + student.guardianRelationship + ')' : 'N/A' %></td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Previous School:</strong></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.previousSchool || 'N/A' %></td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>O-Level Results:</strong></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;"><%= student.oLevelResult || 'N/A' %></td>
-                </tr>
-            </table>
- </div>
+
+                <!-- ========================================== -->
+                <!-- ONLINE INTERVIEW -->
+                <!-- ========================================== -->
+
+                <% if (
+                    interview &&
+                    interview.interviewType === "online" &&
+                    interview.status !== "completed"
+                ) { %>
+
+                    <div class="dashboard-card interview-card">
+
+                        <div class="interview-header">
+
+                            <h3>
+                                <i class="fas fa-video"></i>
+                                Online Admission Interview
+                            </h3>
+
+                            <span class="interview-type">
+                                ONLINE
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Your payment has been verified.
+                            Your online admission interview is ready.
+                        </p>
+
+                        <p>
+                            You will answer the following subjects.
+                            Each subject has its own time limit.
+                        </p>
+
+
+                        <% if (
+                            interview.subjects &&
+                            interview.subjects.length > 0
+                        ) { %>
+
+                            <div class="interview-subjects">
+
+                                <% interview.subjects.forEach(
+                                    function(subject)
+                                { %>
+
+                                    <div class="subject-item">
+
+                                        <strong>
+                                            <%= subject.name %>
+                                        </strong>
+
+                                        <span class="subject-time">
+                                            <%= subject.durationMinutes %>
+                                            minutes
+                                        </span>
+
+                                    </div>
+
+                                <% }); %>
+
+                            </div>
+
+                        <% } else { %>
+
+                            <div class="interview-message">
+
+                                <strong>
+                                    Interview preparation
+                                </strong>
+
+                                <p>
+                                    Your payment has been verified,
+                                    but your interview subjects have
+                                    not been loaded yet.
+                                </p>
+
+                            </div>
+
+                        <% } %>
+
+
+                        <!-- START / CONTINUE BUTTON -->
+
+                        <% if (
+                            interview.status === "in_progress"
+                        ) { %>
+
+                            <a
+                                href="/student-interview"
+                                class="interview-btn"
+                            >
+                                <i class="fas fa-play"></i>
+                                Continue Interview
+                            </a>
+
+                        <% } else { %>
+
+                            <a
+                                href="/student-interview"
+                                class="interview-btn"
+                            >
+                                <i class="fas fa-play-circle"></i>
+                                Start Interview
+                            </a>
+
+                        <% } %>
+
+                    </div>
+
+
+                <!-- ========================================== -->
+                <!-- PHYSICAL INTERVIEW -->
+                <!-- ========================================== -->
+
+                <% } else if (
+                    interview &&
+                    interview.interviewType === "physical" &&
+                    interview.status !== "completed"
+                ) { %>
+
+                    <div class="dashboard-card interview-card physical">
+
+                        <div class="interview-header">
+
+                            <h3>
+                                <i class="fas fa-building"></i>
+                                Physical Admission Interview
+                            </h3>
+
+                            <span class="interview-type physical">
+                                PHYSICAL
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Your payment has been verified.
+                        </p>
+
+                        <div class="interview-message">
+
+                            <strong>
+                                Physical interview required
+                            </strong>
+
+                            <p>
+                                Because your academic background
+                                is non-science, you will not receive
+                                the online science interview.
+                            </p>
+
+                            <p>
+                                Please attend the college physically
+                                for your admission interview.
+                            </p>
+
+
+                            <% if (
+                                interview.scheduledAt
+                            ) { %>
+
+                                <p>
+                                    <strong>
+                                        Scheduled:
+                                    </strong>
+
+                                    <%= new Date(
+                                        interview.scheduledAt
+                                    ).toLocaleString() %>
+                                </p>
+
+                            <% } else { %>
+
+                                <p>
+                                    The admissions office will
+                                    provide your physical interview
+                                    date and time.
+                                </p>
+
+                            <% } %>
+
+                        </div>
+
+                        <a
+                            href="/student-interview"
+                            class="interview-btn blue"
+                        >
+                            <i class="fas fa-calendar-check"></i>
+                            View Interview Details
+                        </a>
+
+                    </div>
+
+
+                <!-- ========================================== -->
+                <!-- INTERVIEW COMPLETED -->
+                <!-- ========================================== -->
+
+                <% } else if (
+                    interview &&
+                    interview.status === "completed"
+                ) { %>
+
+                    <div class="dashboard-card interview-card completed">
+
+                        <div class="interview-header">
+
+                            <h3>
+                                <i class="fas fa-check-circle"></i>
+                                Interview Completed
+                            </h3>
+
+                            <span class="interview-type completed">
+                                COMPLETED
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Your admission interview has been
+                            completed successfully.
+                        </p>
+
+
+                        <div class="interview-score">
+
+                            <div class="score-box">
+
+                                <span class="score-value">
+                                    <%= student.interviewScore || 0 %>
+                                </span>
+
+                                <span class="score-label">
+                                    Score
+                                </span>
+
+                            </div>
+
+
+                            <div class="score-box">
+
+                                <span class="score-value">
+                                    <%= student.interviewTotalScore || 0 %>
+                                </span>
+
+                                <span class="score-label">
+                                    Total
+                                </span>
+
+                            </div>
+
+
+                            <div class="score-box">
+
+                                <span class="score-value">
+                                    <%= student.interviewPercentage || 0 %>%
+                                </span>
+
+                                <span class="score-label">
+                                    Percentage
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <% if (
+                            student.applicationStatus ===
+                            "under_review"
+                        ) { %>
+
+                            <div class="interview-message">
+
+                                <strong>
+                                    Application Under Review
+                                </strong>
+
+                                <p>
+                                    Your interview has been completed.
+                                    The admissions team is reviewing
+                                    your application.
+                                </p>
+
+                            </div>
+
+                        <% } %>
+
+                    </div>
+
+
+                <!-- ========================================== -->
+                <!-- PAID BUT INTERVIEW NOT FOUND -->
+                <!-- ========================================== -->
+
+                <% } else if (
+                    student.paymentStatus === "paid" &&
+                    !interview
+                ) { %>
+
+                    <div class="dashboard-card interview-card pending">
+
+                        <h3>
+                            <i class="fas fa-clock"></i>
+                            Interview Preparation
+                        </h3>
+
+                        <p>
+                            Your payment has been verified,
+                            but your interview record could not
+                            be loaded.
+                        </p>
+
+                        <p>
+                            Please refresh this dashboard.
+                            If the problem continues, contact
+                            the admissions office.
+                        </p>
+
+                    </div>
+
+                <% } %>
+
+
             <% } %>
-        </div>
+
+        <% } %>
+
+
+        <!-- ================================================== -->
+        <!-- PERSONAL INFORMATION -->
+        <!-- ================================================== -->
+
+        <% if (
+            student &&
+            student.firstName
+        ) { %>
+
+            <div
+                class="dashboard-card"
+                style="margin-top: 30px;"
+            >
+
+                <h3>
+                    <i class="fas fa-user"></i>
+                    Your Information
+                </h3>
+
+                <div class="applications-table">
+
+                    <table>
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Full Name:
+                                </strong>
+                            </td>
+
+                            <td>
+                                <%= student.firstName %>
+                                <%= student.lastName %>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Email:
+                                </strong>
+                            </td>
+
+                            <td>
+                                <%= student.email %>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Phone:
+                                </strong>
+                            </td>
+
+                            <td>
+                                <%= student.phone || "N/A" %>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Date of Birth:
+                                </strong>
+                            </td>
+
+                            <td>
+
+                                <%= student.dateOfBirth
+                                    ? new Date(
+                                        student.dateOfBirth
+                                    ).toLocaleDateString()
+                                    : "N/A"
+                                %>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Gender:
+                                </strong>
+                            </td>
+
+                            <td>
+                                <%= student.gender || "N/A" %>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Academic Background:
+                                </strong>
+                            </td>
+
+                            <td>
+
+                                <% if (
+                                    student.academicBackground ===
+                                    "science"
+                                ) { %>
+
+                                    Science
+
+                                <% } else if (
+                                    student.academicBackground ===
+                                    "non_science"
+                                ) { %>
+
+                                    Non-Science
+
+                                <% } else { %>
+
+                                    N/A
+
+                                <% } %>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Address:
+                                </strong>
+                            </td>
+
+                            <td>
+
+                                <%= student.contactAddress ||
+                                    "N/A"
+                                %>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Guardian:
+                                </strong>
+                            </td>
+
+                            <td>
+
+                                <%= student.guardianName
+                                    ? student.guardianName +
+                                      (
+                                        student.guardianRelationship
+                                          ? " (" +
+                                            student.guardianRelationship +
+                                            ")"
+                                          : ""
+                                      )
+                                    : "N/A"
+                                %>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Previous School:
+                                </strong>
+                            </td>
+
+                            <td>
+                                <%= student.previousSchool || "N/A" %>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    O-Level Results:
+                                </strong>
+                            </td>
+
+                            <td>
+                                <%= student.oLevelResult || "N/A" %>
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        <% } %>
 
     </div>
 
+
     <script src="/js/index.js"></script>
+
 </body>
 
 </html>
-

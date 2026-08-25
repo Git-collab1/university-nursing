@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Online Interview | Legend College
+  </title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #f4f7f7;
+      color: #263238;
+    }
+
+    .topbar {
+      background: #00695c;
+      color: #fff;
+      padding: 15px 20px;
+    }
+
+    .topbar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .timer {
+      background: #fff;
+      color: #c62828;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 8px 15px;
+      border-radius: 8px;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .page {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
+    }
+
+    .subject-title {
+      color: #00695c;
+      font-family: "Playfair Display", serif;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .progress {
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .question {
+      margin-bottom: 30px;
+    }
+
+    .question-number {
+      color: #00695c;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .question-text {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .comprehension-passage {
+      background: #f8faf9;
+      border-left: 4px solid #00695c;
+      padding: 20px;
+      margin: 20px 0 30px;
+      border-radius: 8px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      font-size: 15px;
+    }
+
+    .question-image {
+      margin: 20px 0 30px;
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    .question-image img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+    }
+
+    .option {
+      display: block;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      padding: 14px 15px;
+      cursor: pointer;
+      transition: 0.2s;
+      line-height: 1.5;
+    }
+
+    .option:hover {
+      border-color: #00695c;
+      background: #f0f7f6;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      flex: 1;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .btn-next {
+      background: #00695c;
+      color: #fff;
+    }
+
+    .btn-next:hover {
+      background: #004d40;
+    }
+
+    .btn-finish {
+      background: #1565c0;
+      color: #fff;
+    }
+
+    .btn-finish:hover {
+      background: #0d47a1;
+    }
+
+    .timer-warning {
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .timer {
+        width: 100%;
+      }
+
+      .card {
+        padding: 20px 15px;
+      }
+
+      .question-text {
+        font-size: 16px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+
+      <h1>
+        Legend College Online Interview
+      </h1>
+
+      <div
+        id="timer"
+        class="timer"
+      >
+        --:--
+      </div>
+
+    </div>
+  </div>
+
+  <div class="page">
+
+    <div class="card">
+
+      <h2 class="subject-title">
+        <%= subject.name %>
+      </h2>
+
+      <div class="progress">
+        Question
+        <strong>
+          <%= questionIndex + 1 %>
+        </strong>
+
+        of
+
+        <strong>
+          <%= subject.questions.length %>
+        </strong>
+      </div>
+
+      <form
+        id="answerForm"
+        method="POST"
+        action="/student-interview/answer"
+      >
+
+        <input
+          type="hidden"
+          name="subjectIndex"
+          value="<%= subjectIndex %>"
+        >
+
+        <input
+          type="hidden"
+          name="questionIndex"
+          value="<%= questionIndex %>"
+        >
+
+        <input
+          type="hidden"
+          name="nextAction"
+          id="nextAction"
+          value="next"
+        >
+
+        <div class="question">
+
+          <div class="question-number">
+            Question <%= questionIndex + 1 %>
+          </div>
+
+          <!-- ========================================= -->
+          <!-- ENGLISH COMPREHENSION PASSAGE -->
+          <!-- ========================================= -->
+
+          <% if (
+            subject.name === "English" &&
+            subject.passage
+          ) { %>
+
+            <div class="comprehension-passage">
+              <%= subject.passage %>
+            </div>
+
+          <% } %>
+
+          <!-- ========================================= -->
+          <!-- QUESTION TEXT -->
+          <!-- ========================================= -->
+
+          <div class="question-text">
+            <%= question.question %>
+          </div>
+
+          <!-- ========================================= -->
+          <!-- QUESTION IMAGE -->
+          <!-- ========================================= -->
+
+          <% if (question.image) { %>
+
+            <div class="question-image">
+
+              <img
+                src="<%= question.image %>"
+                alt="Question diagram"
+              >
+
+            </div>
+
+          <% } %>
+
+          <!-- ========================================= -->
+          <!-- ANSWER OPTIONS -->
+          <!-- ========================================= -->
+
+          <% if (
+            Array.isArray(question.options) &&
+            question.options.length > 0
+          ) { %>
+
+            <% question.options.forEach(
+              function(option)
+            { %>
+
+              <label class="option">
+
+                <input
+                  type="radio"
+                  name="answer"
+                  value="<%= option %>"
+                  <%= question.answer === option
+                    ? "checked"
+                    : "" %>
+                >
+
+                <%= option %>
+
+              </label>
+
+            <% }); %>
+
+          <% } else { %>
+
+            <p>
+              No answer options are available for this question.
+            </p>
+
+          <% } %>
+
+        </div>
+
+        <div class="actions">
+
+          <% if (
+            questionIndex <
+            subject.questions.length - 1
+          ) { %>
+
+            <button
+              type="submit"
+              class="btn btn-next"
+            >
+              Save &amp; Next
+            </button>
+
+          <% } else { %>
+
+            <button
+              type="submit"
+              class="btn btn-finish"
+              onclick="prepareFinish()"
+            >
+              Complete Subject
+            </button>
+
+          <% } %>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // =====================================================
+    // TIMER
+    // =====================================================
+
+    const durationMinutes =
+      <%= Number(subject.durationMinutes || 0) %>;
+
+    const subjectStartedAt =
+      new Date(
+        "<%= subject.startedAt
+          ? subject.startedAt.toISOString()
+          : new Date().toISOString() %>"
+      ).getTime();
+
+    const durationMilliseconds =
+      durationMinutes * 60 * 1000;
+
+    const timerElement =
+      document.getElementById("timer");
+
+    let finishedAutomatically = false;
+
+    function updateTimer() {
+
+      const now =
+        Date.now();
+
+      const elapsed =
+        now - subjectStartedAt;
+
+      const remaining =
+        durationMilliseconds - elapsed;
+
+      if (remaining <= 0) {
+
+        timerElement.textContent =
+          "00:00";
+
+        if (!finishedAutomatically) {
+
+          finishedAutomatically =
+            true;
+
+          autoSubmit();
+        }
+
+        return;
+      }
+
+      const totalSeconds =
+        Math.floor(
+          remaining / 1000
+        );
+
+      const minutes =
+        Math.floor(
+          totalSeconds / 60
+        );
+
+      const seconds =
+        totalSeconds % 60;
+
+      timerElement.textContent =
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+
+      if (remaining <= 60000) {
+
+        timerElement.classList.add(
+          "timer-warning"
+        );
+      }
+    }
+
+    updateTimer();
+
+    const timerInterval =
+      setInterval(
+        updateTimer,
+        1000
+      );
+
+    // =====================================================
+    // AUTO SUBMIT WHEN TIME EXPIRES
+    // =====================================================
+
+    function autoSubmit() {
+
+      clearInterval(
+        timerInterval
+      );
+
+      const actionInput =
+        document.getElementById(
+          "nextAction"
+        );
+
+      if (actionInput) {
+
+        actionInput.value =
+          "next";
+      }
+
+      const form =
+        document.getElementById(
+          "answerForm"
+        );
+
+      if (form) {
+
+        form.submit();
+      }
+    }
+
+    // =====================================================
+    // COMPLETE SUBJECT
+    // =====================================================
+
+    function prepareFinish() {
+
+      const actionInput =
+        document.getElementById(
+          "nextAction"
+        );
+
+      if (actionInput) {
+
+        actionInput.value =
+          "finish_subject";
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>
+

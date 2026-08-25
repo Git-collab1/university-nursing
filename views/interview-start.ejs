@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    Interview | Legend College
+  </title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #f4f7f7;
+      color: #263238;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 15px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 700px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      margin: 0 0 10px;
+      color: #00695c;
+      font-family: "Playfair Display", serif;
+    }
+
+    .header p {
+      color: #667;
+      margin: 0;
+    }
+
+    .notice {
+      padding: 18px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      background: #e8f5e9;
+      border-left: 5px solid #00695c;
+    }
+
+    .warning {
+      background: #fff8e1;
+      border-left-color: #f9a825;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      font-weight: 600;
+    }
+
+    .subjects {
+      margin-top: 20px;
+    }
+
+    .subject {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 15px;
+      background: #f7faf9;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      border: none;
+      background: #00695c;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .btn:hover {
+      background: #004d40;
+    }
+
+    .back {
+      background: #777;
+    }
+
+    .back:hover {
+      background: #555;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 25px 18px;
+      }
+
+      .info-row,
+      .subject {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <div class="card">
+
+      <div class="header">
+
+        <h1>
+          Admission Interview
+        </h1>
+
+        <p>
+          Legend College of Nursing And Emergency Health Sciences Nnewi
+        </p>
+
+      </div>
+
+      <div class="info-row">
+
+        <span class="label">
+          Applicant:
+        </span>
+
+        <span>
+          <%= student.firstName %>
+            <%= student.lastName %>
+        </span>
+
+      </div>
+
+      <div class="info-row">
+
+        <span class="label">
+          Program:
+        </span>
+
+        <span>
+          <%= student.program %>
+        </span>
+
+      </div>
+
+      <div class="info-row">
+
+        <span class="label">
+          Interview Type:
+        </span>
+
+        <span>
+          <%= interview.interviewType==="online" ? "Online Interview" : "Physical Interview" %>
+        </span>
+
+      </div>
+
+      <% if (interview.interviewType==="online" ) { %>
+
+        <div class="notice">
+
+          <strong>
+            Online Interview Instructions
+          </strong>
+
+          <p>
+            Your online interview consists of the subjects
+            shown below. Each subject has its own time limit.
+          </p>
+
+          <p>
+            Make sure you have a stable internet connection
+            before starting.
+          </p>
+
+        </div>
+
+        <div class="subjects">
+
+          <% interview.subjects.forEach(function(subject) { %>
+
+            <div class="subject">
+
+              <strong>
+                <%= subject.name %>
+              </strong>
+
+              <span>
+                <%= subject.durationMinutes %> minutes
+              </span>
+
+            </div>
+
+            <% }); %>
+
+        </div>
+
+        <div class="notice warning">
+
+          <strong>
+            Important
+          </strong>
+
+          <p>
+            Once the interview begins, the timer will run.
+            Do not refresh or close the browser unnecessarily.
+          </p>
+
+          <p>
+            Your answers will be submitted and scored by
+            the system.
+          </p>
+
+        </div>
+
+        <form method="POST" action="/student-interview/start">
+
+          <button type="submit" class="btn">
+            Start Interview
+          </button>
+
+        </form>
+
+        <% } else { %>
+
+          <div class="notice warning">
+
+            <strong>
+              Physical Interview
+            </strong>
+
+            <p>
+              You are not scheduled for the online science
+              interview.
+            </p>
+
+            <p>
+              Please attend your physical interview at Legend
+              College as instructed by the admissions team.
+            </p>
+
+            <% if (interview.scheduledAt) { %>
+
+              <p>
+                <strong>
+                  Scheduled:
+                </strong>
+
+                <%= new Date(interview.scheduledAt).toLocaleString() %>
+              </p>
+
+              <% } %>
+
+          </div>
+
+          <% } %>
+
+            <a href="/student-dashboard" class="btn back">
+              Back to Dashboard
+            </a>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>
