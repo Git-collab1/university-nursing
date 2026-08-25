@@ -101,6 +101,20 @@ router.post(
         password
       } = req.body;
 
+      console.log("=== ADMIN LOGIN DEBUG ===");
+
+      console.log(
+        "Username received:",
+        JSON.stringify(username)
+      );
+
+      console.log(
+        "Password received:",
+        password
+          ? "[RECEIVED]"
+          : "[EMPTY]"
+      );
+
       const admin =
         await Admin.findOne({
           username:
